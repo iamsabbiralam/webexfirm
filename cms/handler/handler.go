@@ -38,9 +38,9 @@ func NewServer(
 		assets:  assets,
 		assetFS: hashfs.NewFS(assets),
 		decoder: decoder,
-		config: config,
+		config:  config,
 	}
-	
+
 	if err := s.parseTemplates(); err != nil {
 		return nil, err
 	}
@@ -51,10 +51,9 @@ func NewServer(
 	}
 
 	r := mux.NewRouter()
-	
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", cacheStaticFiles(http.FileServer(http.FS(s.assetFS)))))
 
-
+	r.HandleFunc(homePath, s.getHomeHandler).Name("home")
 	r.NotFoundHandler = s.getErrorHandler()
 	return r, nil
 }
