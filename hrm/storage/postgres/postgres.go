@@ -58,7 +58,7 @@ type tx struct {
 	committed *bool
 }
 
-func (s *Storage) NewTransacton(ctx context.Context) (context.Context, error) {
+func (s *Storage) NewTransaction(ctx context.Context) (context.Context, error) {
 	t, err := s.db.BeginTxx(ctx, &sql.TxOptions{
 		Isolation: sql.LevelReadCommitted,
 	})

@@ -19,13 +19,16 @@ func main() {
 			strings.NewReplacer(".", "_"),
 		),
 	)
+
 	config.SetConfigFile("env/config")
 	config.SetConfigType("ini")
 	config.AutomaticEnv()
 	if err := config.ReadInConfig(); err != nil {
 		log.Printf("error loading configuration: %v", err)
 	}
-
+	fmt.Println("##################################")
+	fmt.Println(config)
+	fmt.Println("##################################")
 	store, err := newDBFromConfig(config)
 	if err != nil {
 		log.Print("unable to configure storage", err)
@@ -50,12 +53,12 @@ func newDBFromConfig(config *viper.Viper) (*postgres.Storage, error) {
 	dbParams += " " + "sslmode=" + cf("sslMode")
 	dbParams += " " + "connect_timeout=" + ci("connectionTimeout")
 	dbParams += " " + "statement_timeout=" + ci("statementTimeout")
-	dbParams += " " + "idle_in_transaction_session_timeout=" + ci("idleTransacionTimeout")
+	dbParams += " " + "idle_in_transaction_session_timeout=" + ci("idleTransactionTimeout")
 	db, err := postgres.NewStorage(dbParams)
 	if err != nil {
 		return nil, err
 	}
-	return db, db.RunMigration(cf("migrationDir"))
+	return db, db.RunMigration(dbParams)
 }
 
 func setupGRPCService(store *postgres.Storage, config *viper.Viper) error {
