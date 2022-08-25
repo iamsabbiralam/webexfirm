@@ -2,9 +2,10 @@ package handler
 
 import (
 	"errors"
-	"html/template"
 	"io/fs"
 	"net/http"
+
+	signUpG "personal/webex/gunk/v1/signUp"
 
 	"github.com/benbjohnson/hashfs"
 	"github.com/gorilla/mux"
@@ -13,16 +14,6 @@ import (
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )
-
-type Server struct {
-	templates *template.Template
-	env       string
-	logger    *logrus.Entry
-	assets    fs.FS
-	assetFS   *hashfs.FS
-	decoder   *schema.Decoder
-	config    *viper.Viper
-}
 
 func NewServer(
 	env string,
@@ -39,6 +30,11 @@ func NewServer(
 		assetFS: hashfs.NewFS(assets),
 		decoder: decoder,
 		config:  config,
+		reg: struct {
+			signUpG.SignUpServiceClient
+		}{
+			SignUpServiceClient: signUpG.NewSignUpServiceClient(hrmConn),
+		},
 	}
 
 	if err := s.parseTemplates(); err != nil {
@@ -54,6 +50,11 @@ func NewServer(
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", cacheStaticFiles(http.FileServer(http.FS(s.assetFS)))))
 
 	r.HandleFunc(homePath, s.getHomeHandler).Name("home")
+
+	/* signup */
+	r.HandleFunc(signUpPath, s.getSignUpHandler).Methods("GET").Name("signup-form")
+	r.HandleFunc(signUpPath, s.postSignUpHandler).Methods("POST").Name("signup")
+
 	r.NotFoundHandler = s.getErrorHandler()
 	return r, nil
 }
