@@ -9,6 +9,10 @@ import (
 
 	"personal/webex/hrm/storage/postgres"
 
+	signUpG "personal/webex/gunk/v1/signUp"
+	signUpC "personal/webex/hrm/core/signUp"
+	signUpS "personal/webex/hrm/services/signUp"
+
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )
@@ -26,9 +30,7 @@ func main() {
 	if err := config.ReadInConfig(); err != nil {
 		log.Printf("error loading configuration: %v", err)
 	}
-	fmt.Println("##################################")
-	fmt.Println(config)
-	fmt.Println("##################################")
+
 	store, err := newDBFromConfig(config)
 	if err != nil {
 		log.Print("unable to configure storage", err)
@@ -67,12 +69,17 @@ func setupGRPCService(store *postgres.Storage, config *viper.Viper) error {
 		return err
 	}
 
+	registerC := signUpC.New(store)
+	registerS := signUpS.New(registerC)
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", config.GetString("server.port")))
 	if err != nil {
 		log.Printf("Failed to listen on port 50051: %v", err)
 	}
-	grpcServer := grpc.NewServer()
 
+	grpcServer := grpc.NewServer()
+	signUpG.RegisterSignUpServiceServer(grpcServer, registerS)
+	
 	log.Printf("Server hrm management listening at : %+v", lis.Addr())
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Print("Failed to serve GRPC over port : 50051")

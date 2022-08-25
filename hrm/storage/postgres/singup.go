@@ -5,7 +5,6 @@ import (
 	"personal/webex/hrm/storage"
 )
 
-
 const register = `
 	INSERT INTO users (
 		first_name,
