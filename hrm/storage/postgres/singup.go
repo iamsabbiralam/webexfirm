@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+
 	"personal/webex/hrm/storage"
 )
 
@@ -31,7 +32,7 @@ const register = `
 	) RETURNING
 		id`
 
-func(s *Storage) SignUP(ctx context.Context, user storage.SignUP) (string, error) {
+func (s *Storage) SignUP(ctx context.Context, user storage.SignUP) (string, error) {
 	stmt, err := s.db.PrepareNamed(register)
 	if err != nil {
 		return "", err

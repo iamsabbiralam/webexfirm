@@ -1,6 +1,6 @@
 package handler
 
 const (
-	homePath = "/"
+	homePath   = "/"
 	signUpPath = "/register"
 )

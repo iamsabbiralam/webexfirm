@@ -13,6 +13,10 @@ import (
 	signUpC "personal/webex/hrm/core/signUp"
 	signUpS "personal/webex/hrm/services/signUp"
 
+	loginG "personal/webex/gunk/v1/login"
+	loginC "personal/webex/hrm/core/login"
+	loginS "personal/webex/hrm/services/login"
+
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )
@@ -72,6 +76,9 @@ func setupGRPCService(store *postgres.Storage, config *viper.Viper) error {
 	registerC := signUpC.New(store)
 	registerS := signUpS.New(registerC)
 
+	logC := loginC.New(store)
+	logS := loginS.New(logC)
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", config.GetString("server.port")))
 	if err != nil {
 		log.Printf("Failed to listen on port 50051: %v", err)
@@ -79,7 +86,8 @@ func setupGRPCService(store *postgres.Storage, config *viper.Viper) error {
 
 	grpcServer := grpc.NewServer()
 	signUpG.RegisterSignUpServiceServer(grpcServer, registerS)
-	
+	loginG.RegisterLoginServiceServer(grpcServer, logS)
+
 	log.Printf("Server hrm management listening at : %+v", lis.Addr())
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Print("Failed to serve GRPC over port : 50051")
