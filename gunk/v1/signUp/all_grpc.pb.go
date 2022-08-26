@@ -4,6 +4,7 @@ package signUp
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -47,8 +48,7 @@ type SignUpServiceServer interface {
 }
 
 // UnimplementedSignUpServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSignUpServiceServer struct {
-}
+type UnimplementedSignUpServiceServer struct{}
 
 func (UnimplementedSignUpServiceServer) Registration(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Registration not implemented")

@@ -6,7 +6,7 @@ import (
 	"personal/webex/serviceutil/logging"
 )
 
-func(s *Server) getHomeHandler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) getHomeHandler(w http.ResponseWriter, r *http.Request) {
 	log := logging.FromContext(r.Context()).WithField("method", "getHomeHandler")
 	template := s.lookupTemplate("home.html")
 	if template == nil {

@@ -14,7 +14,7 @@ type (
 		DeletedAt sql.NullTime   `db:"deleted_at,omitempty"`
 		DeletedBy sql.NullString `db:"deleted_by,omitempty"`
 	}
-	
+
 	SignUP struct {
 		ID        string    `db:"id"`
 		FirstName string    `db:"first_name"`

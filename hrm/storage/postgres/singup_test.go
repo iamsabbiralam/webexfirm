@@ -2,9 +2,10 @@ package postgres
 
 import (
 	"context"
-	"personal/webex/hrm/storage"
 	"testing"
 	"time"
+
+	"personal/webex/hrm/storage"
 )
 
 func TestStorage_SignUP(t *testing.T) {

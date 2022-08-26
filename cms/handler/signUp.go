@@ -4,8 +4,9 @@ import (
 	"errors"
 	"html/template"
 	"net/http"
-	"personal/webex/serviceutil/logging"
 	"unicode"
+
+	"personal/webex/serviceutil/logging"
 
 	signG "personal/webex/gunk/v1/signUp"
 
