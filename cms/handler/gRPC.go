@@ -5,10 +5,12 @@ import (
 	"io/fs"
 	"net/http"
 
+	logING "personal/webex/gunk/v1/login"
 	signUpG "personal/webex/gunk/v1/signUp"
 
 	"github.com/benbjohnson/hashfs"
 	"github.com/gorilla/schema"
+	"github.com/gorilla/sessions"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"golang.org/x/oauth2"
@@ -39,8 +41,18 @@ type Server struct {
 	decoder   *schema.Decoder
 	config    *viper.Viper
 	reg       signUp
+	log       login
+	sess      *sessions.CookieStore
 }
 
 type signUp interface {
 	signUpG.SignUpServiceClient
+}
+
+type login interface {
+	logING.LoginServiceClient
+}
+
+type sess struct {
+	Store *sessions.CookieStore
 }
