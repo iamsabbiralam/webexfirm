@@ -13,7 +13,7 @@ type Handler struct {
 }
 
 type LoginStore interface {
-	Login(context.Context, storage.SignUP) error
+	Login(context.Context, string) (storage.SignUP, error)
 }
 
 func New(ls LoginStore) *Handler {

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"html/template"
 	"net/http"
 	"path"
@@ -9,6 +10,9 @@ import (
 
 	"github.com/Masterminds/sprig"
 	"github.com/gorilla/csrf"
+	"github.com/gorilla/sessions"
+	"github.com/spf13/viper"
+	"golang.org/x/oauth2"
 	tspb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -146,4 +150,44 @@ func (s *Server) parseTemplates() error {
 	}
 	s.templates = tmpl
 	return nil
+}
+
+func NewAuthenticator(config *viper.Viper) (*Authenticator, *sessions.CookieStore, error) {
+	// cookie store
+	cookieSecret := config.GetString("auth.cookieSecret")
+	if cookieSecret == "" {
+		return nil, nil, errors.New("missing cookie secret")
+	}
+
+	cookies := sessions.NewCookieStore([]byte(cookieSecret))
+	cookies.Options.HttpOnly = true
+	cookies.Options.MaxAge = config.GetInt("auth.cookieMaxAge")
+	cookies.Options.Secure = config.GetBool("auth.cookieSecure")
+
+	issuer := config.GetString("auth.issuer")
+	if issuer == "" {
+		return nil, cookies, nil
+	}
+
+	clientID := config.GetString("auth.clientID")
+	if clientID == "" {
+		return nil, cookies, errors.New("missing client ID")
+	}
+	clientSecret := config.GetString("auth.clientSecret")
+	if clientSecret == "" {
+		return nil, cookies, errors.New("missing client secret")
+	}
+	baseURL := config.GetString("server.baseURL")
+	if baseURL == "" {
+		return nil, cookies, errors.New("missing base URL")
+	}
+
+	return &Authenticator{
+		Config: oauth2.Config{
+			ClientID:     clientID,
+			ClientSecret: clientSecret,
+			RedirectURL:  baseURL + "/callback",
+		},
+		BaseURL: baseURL,
+	}, cookies, nil
 }

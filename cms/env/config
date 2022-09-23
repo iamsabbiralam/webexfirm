@@ -13,6 +13,14 @@ secret="test"
 [hrm]
 url="127.0.0.1:4000"
 
+[auth]
+cookieSecret="secret"
+cookieMaxAge="259200"
+cookieSecure="false"
+clientID="wenex"
+clientSecret="secret"
+oauthURL="http://127.0.0.1:3000/oauth2"
+
 [templates]
 ssoURL="http://127.0.0.1:4444/"
 

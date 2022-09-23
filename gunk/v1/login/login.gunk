@@ -1,15 +1,18 @@
 package login
 
 type Login struct {
-	Email    string `pb:"1" json:"email"`
-	Password string `pb:"2" json:"password"`
+	ID       string `pb:"1" json:"id"`
+	Email    string `pb:"2" json:"email"`
+	Password string `pb:"3" json:"password"`
 }
 
 type LoginRequest struct {
-	Login Login `pb:"1" json:"login"`
+	Email string `pb:"1" json:"login"`
 }
 
-type LoginResponse struct{}
+type LoginResponse struct {
+	Login Login `pb:"1" json:"login"`
+}
 
 type LoginService interface {
 	Login(LoginRequest) LoginResponse
