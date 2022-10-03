@@ -74,6 +74,9 @@ func NewServer(
 	r.HandleFunc(loginPath, s.getLoginHandler).Methods("GET").Name("login-form")
 	r.HandleFunc(loginPath, s.postLoginHandler).Methods("POST").Name("login")
 
+	/* dashboard */
+	r.HandleFunc(dashboardPath, s.getDashboardHandler).Methods("GET").Name("dashboard")
+
 	r.NotFoundHandler = s.getErrorHandler()
 	return r, nil
 }

@@ -5,6 +5,6 @@ const (
 	signUpPath = "/register"
 	loginPath  = "/login"
 
-	/* dashborad */
+	/* dashboard */
 	dashboardPath = "/dashboard"
 )
