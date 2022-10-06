@@ -1,22 +1,23 @@
 [runtime]
 environment="development"
 
-[project]
-mfaissuer="Webex"
-mfatimeout="30m"
-
 [server]
 host="127.0.0.1"
-port="4000"
+port="3000"
+
 
 [database]
 host="127.0.0.1"
 port="5432"
 user="postgres"
-password="secret"
+password="P@ssw0rd"
 dbname="hrmdb"
-migrationDir="migration/sql"
+migrationDir="migrations/sql"
 sslMode="disable"
 connectionTimeout="30000"
 statementTimeout="30000"
 idleInTransactionSessionTimeout="30000"
+
+[csrf]
+secure="false"
+secret="test"

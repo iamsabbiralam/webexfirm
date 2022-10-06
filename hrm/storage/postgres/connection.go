@@ -13,12 +13,13 @@ const driver = "postgres"
 
 // NewDBStringFromConfig build database connection string from config file.
 func NewDBStringFromConfig(config *viper.Viper) (string, error) {
-	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s",
+	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 		config.GetString("database.user"),
 		config.GetString("database.password"),
 		config.GetString("database.host"),
 		config.GetString("database.port"),
 		config.GetString("database.dbname"),
+		config.GetString("database.sslMode"),
 	), nil
 }
 
