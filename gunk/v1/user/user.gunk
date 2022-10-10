@@ -1,9 +1,9 @@
 package user
 
 type User struct {
-	ID          int64  `pb:"1"`
+	ID          string  `pb:"1"`
 	FullName       string `pb:"2"`
-	LastName       string `pb:"3"`
+	Email       string `pb:"3"`
 }
 
 type CreateUserRequest struct {
@@ -11,7 +11,7 @@ type CreateUserRequest struct {
 }
 
 type CreateUserResponse struct {
-	ID int64 `pb:"1"`
+	ID string `pb:"1"`
 }
 
 

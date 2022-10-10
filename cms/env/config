@@ -1,0 +1,17 @@
+[runtime]
+environment="development"
+
+[server]
+host="127.0.0.1"
+port="8080"
+
+[userService]
+host="127.0.0.1"
+port="3000"
+
+[session]
+key="jsowjpw38eowj4ur82jmaole0uehqpl"
+
+[csrf]
+secure="false"
+secret="test"

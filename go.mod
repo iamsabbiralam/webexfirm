@@ -3,6 +3,9 @@ module practice/webex
 go 1.19
 
 require (
+	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/schema v1.2.0
+	github.com/gorilla/sessions v1.2.1
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.4
 	github.com/pressly/goose v2.7.0+incompatible
@@ -15,6 +18,7 @@ require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
+	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mattn/go-sqlite3 v1.14.12 // indirect
