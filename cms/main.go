@@ -34,7 +34,7 @@ func main() {
 	store := sessions.NewCookieStore([]byte(config.GetString("session.key")))
 
 	conn, err := grpc.Dial(
-		fmt.Sprintf("%s:%s", config.GetString("categoryService.host"), config.GetString("categoryService.port")),
+		fmt.Sprintf("%s:%s", config.GetString("userService.host"), config.GetString("userService.port")),
 	grpc.WithInsecure(),
 )
 	if err != nil {

@@ -38,6 +38,9 @@ func main() {
 	cs := uc.NewCoreSvc(store)
 	s := user.NewUserServer(cs)
 
+	fmt.Println("conn")
+	fmt.Println(config.GetString("server.host"))
+	fmt.Println("conn")
 	userG.RegisterUserServiceServer(grpcServer, s)
 	host, port := config.GetString("server.host"), config.GetString("server.port")
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", host, port))
