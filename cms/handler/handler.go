@@ -33,6 +33,7 @@ func New(decoder *schema.Decoder, sess *sessions.CookieStore, tc user.UserServic
 
 	r:= mux.NewRouter()
 	r.HandleFunc("/", h.home)
+	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := h.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {
 			http.Error(rw, "invalid URL", http.StatusInternalServerError)
@@ -47,5 +48,5 @@ func (h *Handler) parseTemplate() {
 	h.templates = template.Must(template.ParseFiles(
 		"cms/assets/templates/user/create-user.html",
 		"cms/assets/templates/home.html",
-		))
+	))
 }
