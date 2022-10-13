@@ -3,27 +3,40 @@ package postgres
 import (
 	"context"
 	"practice/webex/hrm/storage"
-	"log"
 )
+
 const insertUser = `
 	INSERT INTO users(
-		full_name,
-		email
+		first_name,
+		last_name,
+		email,
+		password,
+		user_name,
+		dob,
+		gender,
+		phone_number,
 	) VALUES(
-		:full_name,
-		:email
-	)RETURNING id;
+		:first_name,
+		:last_name,
+		:email,
+		:password,
+		:user_name,
+		:dob,
+		:gender,
+		:phone_number,
+	)
+RETURNING
+	id;
 `
-func (s *Storage) Create(ctx context.Context, t storage.User) (string, error) {
+func (s *Storage) CreateUser(ctx context.Context, user storage.User) (string, error) {
 	stmt, err := s.db.PrepareNamed(insertUser)
 	if err != nil {
 		return "", err
 	}
 	var id string
-	if err := stmt.Get(&id, t); err != nil {
+	if err := stmt.Get(&id, user); err != nil {
 		return "", err
 	}
-	log.Println("User ID: ", id)
-	return id, nil
 
-}	
+	return id, nil
+}
