@@ -7,7 +7,7 @@ import (
 )
 
 type userStore interface {
-	Create(context.Context, storage.User) (string, error)
+	CreateUser(context.Context, storage.User) (string, error)
 }
 
 type CoreSvc struct {
@@ -18,8 +18,4 @@ func NewCoreSvc(s userStore) *CoreSvc {
 	return &CoreSvc{
 		store: s,
 	}
-}
-
-func (cs CoreSvc) Create(ctx context.Context, t storage.User) (string, error) {
-	return cs.store.Create(ctx, t)
 }

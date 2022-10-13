@@ -1,19 +1,32 @@
 package user
 
+import "time"
+
 type User struct {
-	ID          string  `pb:"1"`
-	FullName       string `pb:"2"`
-	Email       string `pb:"3"`
+	ID          string    `pb:"1" json:"id"`
+	FirstName   string    `pb:"2" json:"first_name"`
+	LastName    string    `pb:"3" json:"last_name"`
+	Email       string    `pb:"4" json:"email"`
+	Password    string    `pb:"5" json:"password"`
+	UserName    string    `pb:"6" json:"user_name"`
+	DOB         time.Time `pb:"7" json:"dob"`
+	Gender      string    `pb:"8" json:"gender"`
+	PhoneNumber string    `pb:"9" json:"phone_number"`
+	CreatedAt   time.Time `pb:"10" json:"created_at"`
+	CreatedBy   string    `pb:"11" json:"created_by"`
+	UpdatedAt   time.Time `pb:"12" json:"updated_at"`
+	UpdatedBy   string    `pb:"13" json:"updated_by"`
+	DeleteAt    time.Time `pb:"14" json:"deleted_at"`
+	DeletedBy   string    `pb:"15" json:"deleted_by"`
 }
 
 type CreateUserRequest struct {
-	User User `pb:"1"`
+	User User `pb:"1" json:"user"`
 }
 
 type CreateUserResponse struct {
-	ID string `pb:"1"`
+	ID string `pb:"1" json:"id"`
 }
-
 
 type UserService interface {
 	CreateUser(CreateUserRequest) CreateUserResponse
