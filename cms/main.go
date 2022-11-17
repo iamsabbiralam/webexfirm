@@ -2,17 +2,15 @@ package main
 
 import (
 	"fmt"
-	"practice/webex/cms/handler"
 	"log"
 	"net/http"
+	"practice/webex/cms/handler"
 	"strings"
 
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
-
-	user "practice/webex/gunk/v1/user"
 )
 
 func main() {
@@ -30,23 +28,23 @@ func main() {
 
 	decoder := schema.NewDecoder()
 	decoder.IgnoreUnknownKeys(true)
-	
+
 	store := sessions.NewCookieStore([]byte(config.GetString("session.key")))
 
 	conn, err := grpc.Dial(
 		fmt.Sprintf("%s:%s", config.GetString("userService.host"), config.GetString("userService.port")),
-	grpc.WithInsecure(),
-)
+		grpc.WithInsecure(),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
-	tc := user.NewUserServiceClient(conn)
-	r := handler.New(decoder, store, tc)
+
+	r, _ := handler.Handler(decoder, config, store, conn)
 
 	host, port := config.GetString("server.host"), config.GetString("server.port")
 
 	log.Printf("Server starting on http://%s:%s", host, port)
-	if err:= http.ListenAndServe(fmt.Sprintf("%s:%s", host, port), r); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", host, port), r); err != nil {
 		log.Fatal(err)
 	}
 

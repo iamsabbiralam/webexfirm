@@ -9,24 +9,19 @@ import (
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (s *Svc) CreateUser(ctx context.Context, req *userG.CreateUserRequest) (*userG.CreateUserResponse, error) {
 	log.Printf("Request Todo: %#v\n", req.GetUser())
-	// Need to Validate request
 	user := storage.User{
-		ID:           req.User.ID,
-		FirstName:    req.User.FirstName,
-		LastName:     req.User.LastName,
-		Email:        req.User.Email,
-		Password:     req.User.Password,
-		UserName:     req.User.UserName,
-		DOB:          req.User.DOB.String(),
-		Gender:       req.User.Gender,
-		PhoneNumber:  req.User.PhoneNumber,
+		FirstName: req.User.FirstName,
+		LastName:  req.User.LastName,
+		Email:     req.User.Email,
+		Password:  req.User.Password,
+		Status:    int(req.User.Status),
 		CRUDTimeDate: storage.CRUDTimeDate{
-			CreatedBy: req.User.CreatedBy,
-			UpdatedBy:  req.User.UpdatedBy,
+			CreatedBy: timestamppb.Now().String(),
 		},
 	}
 	id, err := s.core.CreateUser(context.Background(), user)
