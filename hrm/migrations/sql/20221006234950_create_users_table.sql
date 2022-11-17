@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     status SMALLINT DEFAULT 0,
-    is_completed BOOLEAN DEFAULT false,
     
     PRIMARY KEY(id)
 );

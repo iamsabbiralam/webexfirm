@@ -9,7 +9,7 @@ type Auth struct {
 	Auth	interface{}
 }
 
-func (h *Handler) home(rw http.ResponseWriter, r *http.Request) {
+func (s *Server) home(rw http.ResponseWriter, r *http.Request) {
 
 	// session, err := h.sess.Get(r, sessionName)
 	// if err != nil {
@@ -19,7 +19,7 @@ func (h *Handler) home(rw http.ResponseWriter, r *http.Request) {
 	// list := Auth{
 	// 	Auth: auth,
 	// }
-	if err:= h.templates.ExecuteTemplate(rw, "home.html", nil); err != nil {
+	if err:= s.templates.ExecuteTemplate(rw, "home.html", nil); err != nil {
 	http.Error(rw, err.Error(), http.StatusInternalServerError)
 	return
 	}

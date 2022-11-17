@@ -16,15 +16,12 @@ type (
 	}
 
 	User struct {
-		ID          string `db:"id"`
-		FirstName   string `db:"first_name"`
-		LastName    string `db:"last_name"`
-		Email       string `db:"email"`
-		Password    string `db:"password"`
-		UserName    string `db:"user_name"`
-		DOB         string `db:"dob"`
-		Gender      string `db:"gender"`
-		PhoneNumber string `db:"phone_number"`
+		ID        string `db:"id"`
+		FirstName string `db:"first_name"`
+		LastName  string `db:"last_name"`
+		Email     string `db:"email"`
+		Password  string `db:"password"`
+		Status    int    `db:"status"`
 		CRUDTimeDate
 	}
 )

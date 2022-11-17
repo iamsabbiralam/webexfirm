@@ -11,19 +11,13 @@ const insertUser = `
 		last_name,
 		email,
 		password,
-		user_name,
-		dob,
-		gender,
-		phone_number,
+		status
 	) VALUES(
 		:first_name,
 		:last_name,
 		:email,
 		:password,
-		:user_name,
-		:dob,
-		:gender,
-		:phone_number,
+		:status
 	)
 RETURNING
 	id;
@@ -33,6 +27,7 @@ func (s *Storage) CreateUser(ctx context.Context, user storage.User) (string, er
 	if err != nil {
 		return "", err
 	}
+
 	var id string
 	if err := stmt.Get(&id, user); err != nil {
 		return "", err
