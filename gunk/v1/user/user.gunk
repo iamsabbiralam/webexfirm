@@ -33,6 +33,15 @@ type CreateUserResponse struct {
 	ID string `pb:"1" json:"id"`
 }
 
+type GetUserRequest struct {
+	User User `pb:"1" json:"user"`
+}
+
+type GetUserResponse struct {
+	User User `pb:"1" json:"user"`
+}
+
 type UserService interface {
 	CreateUser(CreateUserRequest) CreateUserResponse
+	GetUser(GetUserRequest) GetUserResponse
 }

@@ -8,6 +8,7 @@ import (
 
 type userStore interface {
 	CreateUser(context.Context, storage.User) (string, error)
+	GetUser(context.Context, storage.User) (storage.User, error)
 }
 
 type CoreSvc struct {

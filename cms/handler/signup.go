@@ -10,6 +10,7 @@ import (
 
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/gorilla/csrf"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type SignUp struct {
@@ -95,12 +96,18 @@ func (s *Server) postSignUpMethod(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, registrationURL, http.StatusSeeOther)
 	}
 
-	_, err := s.user.CreateUser(ctx, &usr.CreateUserRequest{
+	pass, err := bcrypt.GenerateFromPassword([]byte(form.Password), bcrypt.DefaultCost)
+	if err != nil {
+		logging.WithError(err, log).Error("error with encrypted password")
+		http.Redirect(w, r, "/error", http.StatusSeeOther)
+	}
+
+	_, err = s.user.CreateUser(ctx, &usr.CreateUserRequest{
 		User: &usr.User{
 			FirstName: form.FirstName,
 			LastName:  form.LastName,
 			Email:     form.Email,
-			Password:  form.Password,
+			Password:  string(pass),
 			Status:    usr.Status_Inactive,
 		},
 	})

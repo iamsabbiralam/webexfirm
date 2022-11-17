@@ -13,7 +13,7 @@ import (
 	user "practice/webex/gunk/v1/user"
 )
 
-const sessionName = "cms-session"
+const sessionName = "webex-session"
 
 func Handler(
 	decoder *schema.Decoder,
@@ -39,6 +39,8 @@ func Handler(
 	r.HandleFunc(homeURL, s.home)
 	r.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
 	r.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
+	r.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
+	r.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
 	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := s.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {
@@ -52,8 +54,9 @@ func Handler(
 
 func (s *Server) parseTemplates() error {
 	s.templates = template.Must(template.ParseFiles(
-		"cms/assets/templates/user/create-user.html",
 		"cms/assets/templates/base/home.html",
+		"cms/assets/templates/user/create-user.html",
+		"cms/assets/templates/user/login.html",
 	))
 
 	return nil

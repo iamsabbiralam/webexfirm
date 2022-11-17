@@ -7,4 +7,6 @@ const (
 	// sign up path
 	registrationURL = "/registration"
 	loginURL = "/login"
+
+	dashboardPath = "/dashboard"
 )
