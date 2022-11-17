@@ -35,3 +35,28 @@ func (s *Storage) CreateUser(ctx context.Context, user storage.User) (string, er
 
 	return id, nil
 }
+
+const getUser = `
+	SELECT 
+		email,
+		password
+	FROM
+		users
+	WHERE
+		email = :email AND
+		status = 1 AND
+		deleted_at IS NULL
+`
+func (s *Storage) GetUser(ctx context.Context, user storage.User) (storage.User, error) {
+	stmt, err := s.db.PrepareNamed(getUser)
+	if err != nil {
+		return storage.User{}, err
+	}
+
+	var getUser storage.User
+	if err := stmt.Get(&getUser, user); err != nil {
+		return storage.User{}, err
+	}
+
+	return getUser, nil
+}

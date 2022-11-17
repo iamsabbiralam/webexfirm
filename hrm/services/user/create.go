@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"log"
 
 	userG "practice/webex/gunk/v1/user"
 	"practice/webex/hrm/storage"
@@ -13,7 +12,6 @@ import (
 )
 
 func (s *Svc) CreateUser(ctx context.Context, req *userG.CreateUserRequest) (*userG.CreateUserResponse, error) {
-	log.Printf("Request Todo: %#v\n", req.GetUser())
 	user := storage.User{
 		FirstName: req.User.FirstName,
 		LastName:  req.User.LastName,

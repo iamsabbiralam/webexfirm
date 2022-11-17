@@ -9,6 +9,7 @@ import (
 
 type userCoreStore interface {
 	CreateUser(context.Context, storage.User) (string, error)
+	GetUser(context.Context, storage.User) (storage.User, error)
 }
 
 type Svc struct{
