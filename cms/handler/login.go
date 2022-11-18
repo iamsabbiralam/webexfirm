@@ -109,7 +109,7 @@ func (s *Server) postLoginHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	http.Redirect(w, r, dashboardPath, http.StatusTemporaryRedirect)
+	http.Redirect(w, r, dashboardPath, http.StatusSeeOther)
 }
 
 func emailValidation(s *Server, r *http.Request, email string) validation.Rule {
