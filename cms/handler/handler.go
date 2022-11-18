@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 	"text/template"
 
@@ -37,11 +38,19 @@ func Handler(
 
 	r := mux.NewRouter()
 	r.HandleFunc(homeURL, s.home)
-	r.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
-	r.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
-	r.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
-	r.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
-	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
+	
+	l := r.NewRoute().Subrouter()
+	l.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
+	l.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
+	l.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
+	l.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
+	l.Use(s.loginMiddleware)
+
+	m := r.NewRoute().Subrouter()
+	m.Use(s.authMiddleware)
+	m.HandleFunc(dashboardPath, s.getDashboardMethods).Methods("GET")
+
+	m.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := s.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {
 			http.Error(rw, "invalid URL", http.StatusInternalServerError)
@@ -55,9 +64,42 @@ func Handler(
 func (s *Server) parseTemplates() error {
 	s.templates = template.Must(template.ParseFiles(
 		"cms/assets/templates/base/home.html",
-		"cms/assets/templates/user/create-user.html",
-		"cms/assets/templates/user/login.html",
+		"cms/assets/templates/register/create-user.html",
+		"cms/assets/templates/register/login.html",
+		"cms/assets/templates/user/dashboard.html",
 	))
 
 	return nil
+}
+
+func (s *Server) authMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		session, err := s.sess.Get(r, sessionName)
+		if err != nil {
+			log.Fatal(err)
+		}
+		authUserID := session.Values["authUserID"]
+		if authUserID != nil {
+			next.ServeHTTP(w, r)
+		} else {
+			http.Redirect(w, r, loginURL, http.StatusTemporaryRedirect)
+		}
+		
+	})
+}
+
+func (s *Server) loginMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		session, err := s.sess.Get(r, sessionName)
+		if err != nil {
+			log.Fatal(err)
+		}
+		authUserID := session.Values["authUserID"]
+		if authUserID != nil {
+			http.Redirect(w, r, homeURL, http.StatusTemporaryRedirect)
+			return
+		} else {
+			next.ServeHTTP(w, r)
+		}
+	})
 }
