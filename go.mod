@@ -16,6 +16,7 @@ require (
 	github.com/pressly/goose v2.7.0+incompatible
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.13.0
+	github.com/urfave/negroni v1.0.0
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1

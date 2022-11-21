@@ -2,18 +2,29 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"practice/webex/cms/handler"
+	"practice/webex/serviceutil/logging"
 	"strings"
 
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )
 
+const (
+	svcName = "webex-website"
+	version = "1.0.0"
+)
+
 func main() {
+	log := logging.NewLogger().WithFields(logrus.Fields{
+		"service": svcName,
+		"version": version,
+	})
+	
 	config := viper.NewWithOptions(
 		viper.EnvKeyReplacer(
 			strings.NewReplacer(".", "_"),
@@ -39,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	r, _ := handler.Handler(decoder, config, store, conn)
+	r, _ := handler.Handler(decoder, config, log, store, conn)
 
 	host, port := config.GetString("server.host"), config.GetString("server.port")
 
