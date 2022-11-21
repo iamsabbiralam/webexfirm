@@ -1,17 +1,21 @@
 package handler
 
 import (
+	"errors"
 	"log"
 	"net/http"
 	"text/template"
 
+	"github.com/gorilla/csrf"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 
 	user "practice/webex/gunk/v1/user"
+	"practice/webex/serviceutil/mw"
 )
 
 const sessionName = "webex-session"
@@ -19,6 +23,7 @@ const sessionName = "webex-session"
 func Handler(
 	decoder *schema.Decoder,
 	config *viper.Viper,
+	logger *logrus.Entry,
 	sess *sessions.CookieStore,
 	hrmConn *grpc.ClientConn,
 ) (*mux.Router, error) {
@@ -36,8 +41,17 @@ func Handler(
 		return nil, err
 	}
 
+	csrfSecure := config.GetBool("csrf.secure")
+	csrfSecret := config.GetString("csrf.secret")
+	if csrfSecret == "" {
+		return nil, errors.New("CSRF secret must not be empty")
+	}
+
 	r := mux.NewRouter()
 	r.HandleFunc(homeURL, s.home)
+	mw.ChainHTTPMiddleware(r, logger,
+		mw.CSRF([]byte(csrfSecret), csrf.Secure(csrfSecure), csrf.Path("/")),
+	)
 	
 	l := r.NewRoute().Subrouter()
 	l.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
