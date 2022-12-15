@@ -157,3 +157,19 @@ func passwordValidation(s *Server, r *http.Request, email, pass string) validati
 		return nil
 	})
 }
+
+func (s *Server) logoutHandler(w http.ResponseWriter, r *http.Request) {
+	log := s.logger.WithField("method", "logoutHandler")
+	fmt.Println("---session---")
+	session, err := s.sess.Get(r, sessionName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	session.Values["authUserID"] = nil
+	if err := session.Save(r, w); err != nil {
+		log.Fatal(err)
+	}
+
+	http.Redirect(w, r, homeURL, http.StatusTemporaryRedirect)
+}
