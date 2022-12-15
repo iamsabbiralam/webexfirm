@@ -41,7 +41,21 @@ type GetUserResponse struct {
 	User User `pb:"1" json:"user"`
 }
 
+type GetAllUserRequest struct {
+	ID         []string `pb:"1" json:"id"`
+	SearchTerm string   `pb:"3" json:"search_term"`
+	Limit      int32    `pb:"4" json:"limit"`
+	Offset     int32    `pb:"5" json:"offset"`
+	Status     Status   `pb:"6" json:"status"`
+}
+
+type GetAllUserResponse struct {
+	User  []User `pb:"1" json:"user"`
+	Total int32  `pb:"2" json:"total"`
+}
+
 type UserService interface {
 	CreateUser(CreateUserRequest) CreateUserResponse
 	GetUser(GetUserRequest) GetUserResponse
+	GetAllUsers(GetAllUserRequest) GetAllUserResponse
 }

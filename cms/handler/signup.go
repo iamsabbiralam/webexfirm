@@ -2,6 +2,7 @@ package handler
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 	"practice/webex/serviceutil/logging"
 	"time"
@@ -43,9 +44,16 @@ func (sign SignUp) Validate(server *Server, r *http.Request, id string) error {
 }
 
 func (s *Server) loadSignUpForm(w http.ResponseWriter, r *http.Request, data SignUpTempData) {
-	if err := s.templates.ExecuteTemplate(w, "create-user.html", data); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	template := s.lookupTemplate("create-user.html")
+	if template == nil {
+		errMsg := "unable to load template"
+		http.Error(w, errMsg, http.StatusSeeOther)
 		return
+	}
+
+	if err := template.Execute(w, data); err != nil {
+		log.Printf("error with template execution: %+v", err)
+		http.Redirect(w, r, "", http.StatusSeeOther)
 	}
 }
 

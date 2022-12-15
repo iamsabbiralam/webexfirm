@@ -2,10 +2,13 @@ package handler
 
 import (
 	"errors"
+	"io/fs"
 	"log"
 	"net/http"
-	"text/template"
 
+	// "text/template"
+
+	"github.com/benbjohnson/hashfs"
 	"github.com/gorilla/csrf"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
@@ -26,10 +29,13 @@ func Handler(
 	logger *logrus.Entry,
 	sess *sessions.CookieStore,
 	hrmConn *grpc.ClientConn,
+	assets fs.FS,
 ) (*mux.Router, error) {
 	s := &Server{
 		decoder: decoder,
 		sess:    sess,
+		assets:  assets,
+		assetFS: hashfs.NewFS(assets),
 		user: struct {
 			user.UserServiceClient
 		}{
@@ -52,19 +58,21 @@ func Handler(
 	mw.ChainHTTPMiddleware(r, logger,
 		mw.CSRF([]byte(csrfSecret), csrf.Secure(csrfSecure), csrf.Path("/")),
 	)
-	
+
+	r.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
+	r.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
+	r.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
+	r.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
+	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
+
 	l := r.NewRoute().Subrouter()
-	l.HandleFunc(registrationURL, s.signUpMethod).Methods("GET")
-	l.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
-	l.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
-	l.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
 	l.Use(s.loginMiddleware)
 
 	m := r.NewRoute().Subrouter()
 	m.Use(s.authMiddleware)
-	m.HandleFunc(dashboardPath, s.getDashboardMethods).Methods("GET")
+	m.HandleFunc(dashboardPath, s.getDashboardMethods).Methods("GET").Name("dashboard")
+	m.HandleFunc(getAllUsersPath, s.getAllUsersHandler).Methods("GET").Name("userList")
 
-	m.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := s.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {
 			http.Error(rw, "invalid URL", http.StatusInternalServerError)
@@ -73,17 +81,6 @@ func Handler(
 	})
 
 	return r, nil
-}
-
-func (s *Server) parseTemplates() error {
-	s.templates = template.Must(template.ParseFiles(
-		"cms/assets/templates/base/home.html",
-		"cms/assets/templates/register/create-user.html",
-		"cms/assets/templates/register/login.html",
-		"cms/assets/templates/user/dashboard.html",
-	))
-
-	return nil
 }
 
 func (s *Server) authMiddleware(next http.Handler) http.Handler {
@@ -98,7 +95,7 @@ func (s *Server) authMiddleware(next http.Handler) http.Handler {
 		} else {
 			http.Redirect(w, r, loginURL, http.StatusTemporaryRedirect)
 		}
-		
+
 	})
 }
 

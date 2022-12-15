@@ -10,6 +10,7 @@ import (
 type userCoreStore interface {
 	CreateUser(context.Context, storage.User) (string, error)
 	GetUser(context.Context, storage.User) (storage.User, error)
+	GetAllUsers(context.Context, storage.User) ([]storage.User, error)
 }
 
 type Svc struct{
@@ -22,4 +23,3 @@ func NewUserServer(c userCoreStore) *Svc {
 		core: c,
 	}
 }
-
