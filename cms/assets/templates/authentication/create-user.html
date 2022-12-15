@@ -4,7 +4,7 @@
 
 <head>
       <meta charset="utf-8">
-      <link href="asset/cms/assets/backend/dist/images/logo.svg" rel="shortcut icon">
+      <link href="{{ assetHash "/asset/cms/assets/backend/dist/images/logo.svg" }}" rel="shortcut icon">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description"
             content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
@@ -13,7 +13,7 @@
       <meta name="author" content="LEFT4CODE">
       <title>Register - Midone - Tailwind HTML Admin Template</title>
       <!-- BEGIN: CSS Assets-->
-      <link rel="stylesheet" href="asset/cms/assets/backend/dist/css/app.css" />
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/backend/dist/css/app.css" }}" />
       <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -25,12 +25,12 @@
                   <div class="hidden xl:flex flex-col min-h-screen">
                         <a href="" class="-intro-x flex items-center pt-5">
                               <img alt="Midone Tailwind HTML Admin Template" class="w-6"
-                                    src="asset/cms/assets/backend/dist/images/logo.svg">
+                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/logo.svg" }}">
                               <span class="text-white text-lg ml-3"> Mid<span class="font-medium">One</span> </span>
                         </a>
                         <div class="my-auto">
                               <img alt="Midone Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16"
-                                    src="asset/cms/assets/backend/dist/images/illustration.svg">
+                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/illustration.svg" }}">
                               <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                                     A few more clicks to
                                     <br>
@@ -97,7 +97,7 @@
             </div>
       </div>
       <!-- BEGIN: JS Assets-->
-      <script src="asset/cms/assets/backend/dist/js/app.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/backend/dist/js/app.js" }}"></script>
       <!-- END: JS Assets-->
 </body>
 

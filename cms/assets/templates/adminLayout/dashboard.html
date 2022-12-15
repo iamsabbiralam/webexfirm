@@ -5,7 +5,7 @@
 
 <head>
       <meta charset="utf-8">
-      <link href="asset/cms/assets/backend/dist/images/logo.svg" rel="shortcut icon">
+      <link href="{{ assetHash "/asset/cms/assets/backend/dist/images/logo.svg" }}" rel="shortcut icon">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description"
             content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
@@ -14,7 +14,7 @@
       <meta name="author" content="LEFT4CODE">
       <title>Dashboard - Midone - Tailwind HTML Admin Template</title>
       <!-- BEGIN: CSS Assets-->
-      <link rel="stylesheet" href="asset/cms/assets/backend/dist/css/app.css" />
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/backend/dist/css/app.css" }}" />
       <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -24,7 +24,8 @@
       <div class="mobile-menu md:hidden">
             <div class="mobile-menu-bar">
                   <a href="" class="flex mr-auto">
-                        <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="asset/cms/assets/backend/dist/images/logo.svg">
+                        <img alt="Midone Tailwind HTML Admin Template" class="w-6"
+                              src="{{ assetHash "/asset/cms/assets/backend/dist/images/logo.svg" }}">
                   </a>
                   <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2"
                               class="w-8 h-8 text-white transform -rotate-90"></i> </a>
@@ -339,16 +340,21 @@
             <!-- BEGIN: Side Menu -->
             <nav class="side-nav">
                   <a href="" class="intro-x flex items-center pl-5 pt-4">
-                        <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="asset/cms/assets/backend/dist/images/logo.svg">
+                        <img alt="Midone Tailwind HTML Admin Template" class="w-6"
+                              src="{{ assetHash "/asset/cms/assets/backend/dist/images/logo.svg" }}">
                         <span class="hidden xl:block text-white text-lg ml-3"> Mid<span class="font-medium">one</span>
                         </span>
                   </a>
                   <div class="side-nav__devider my-6"></div>
                   <ul>
                         <li>
-                              <a href="index.html" class="side-menu side-menu--active">
+                              <a href="{{.GlobalURLs.dashboard}}" class="side-menu side-menu--active">
                                     <div class="side-menu__icon"> <i data-feather="home"></i> </div>
                                     <div class="side-menu__title"> Dashboard </div>
+                              </a>
+                              <a href="{{.GlobalURLs.userList}}" class="side-menu side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+                                    <div class="side-menu__title"> User List </div>
                               </a>
                         </li>
                   </ul>
@@ -379,19 +385,22 @@
                                                 <a href="" class="flex items-center">
                                                       <div
                                                             class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full">
-                                                            <i class="w-4 h-4" data-feather="inbox"></i> </div>
+                                                            <i class="w-4 h-4" data-feather="inbox"></i>
+                                                      </div>
                                                       <div class="ml-3">Mail Settings</div>
                                                 </a>
                                                 <a href="" class="flex items-center mt-2">
                                                       <div
                                                             class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full">
-                                                            <i class="w-4 h-4" data-feather="users"></i> </div>
+                                                            <i class="w-4 h-4" data-feather="users"></i>
+                                                      </div>
                                                       <div class="ml-3">Users & Permissions</div>
                                                 </a>
                                                 <a href="" class="flex items-center mt-2">
                                                       <div
                                                             class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full">
-                                                            <i class="w-4 h-4" data-feather="credit-card"></i> </div>
+                                                            <i class="w-4 h-4" data-feather="credit-card"></i>
+                                                      </div>
                                                       <div class="ml-3">Transactions Report</div>
                                                 </a>
                                           </div>
@@ -400,7 +409,8 @@
                                                 <a href="" class="flex items-center mt-2">
                                                       <div class="w-8 h-8 image-fit">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-13.jpg">
+                                                                  class="rounded-full"
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-13.jpg" }}">
                                                       </div>
                                                       <div class="ml-3">Angelina Jolie</div>
                                                       <div
@@ -410,7 +420,8 @@
                                                 <a href="" class="flex items-center mt-2">
                                                       <div class="w-8 h-8 image-fit">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-2.jpg">
+                                                                  class="rounded-full"
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-2.jpg" }}">
                                                       </div>
                                                       <div class="ml-3">Johnny Depp</div>
                                                       <div
@@ -420,7 +431,8 @@
                                                 <a href="" class="flex items-center mt-2">
                                                       <div class="w-8 h-8 image-fit">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-14.jpg">
+                                                                  class="rounded-full"
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-14.jpg" }}">
                                                       </div>
                                                       <div class="ml-3">Russell Crowe</div>
                                                       <div
@@ -430,7 +442,8 @@
                                                 <a href="" class="flex items-center mt-2">
                                                       <div class="w-8 h-8 image-fit">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-6.jpg">
+                                                                  class="rounded-full"
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-6.jpg" }}">
                                                       </div>
                                                       <div class="ml-3">Al Pacino</div>
                                                       <div
@@ -442,7 +455,8 @@
                                           <a href="" class="flex items-center mt-2">
                                                 <div class="w-8 h-8 image-fit">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/preview-9.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-9.jpg" }}">
                                                 </div>
                                                 <div class="ml-3">Samsung Galaxy S20 Ultra</div>
                                                 <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
@@ -451,7 +465,8 @@
                                           <a href="" class="flex items-center mt-2">
                                                 <div class="w-8 h-8 image-fit">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/preview-12.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-12.jpg" }}">
                                                 </div>
                                                 <div class="ml-3">Nike Tanjun</div>
                                                 <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
@@ -460,7 +475,8 @@
                                           <a href="" class="flex items-center mt-2">
                                                 <div class="w-8 h-8 image-fit">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/preview-10.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-10.jpg" }}">
                                                 </div>
                                                 <div class="ml-3">Sony Master Series A9G</div>
                                                 <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
@@ -469,7 +485,8 @@
                                           <a href="" class="flex items-center mt-2">
                                                 <div class="w-8 h-8 image-fit">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/preview-7.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-7.jpg" }}">
                                                 </div>
                                                 <div class="ml-3">Samsung Galaxy S20 Ultra</div>
                                                 <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
@@ -490,7 +507,8 @@
                                           <div class="cursor-pointer relative flex items-center ">
                                                 <div class="w-12 h-12 flex-none image-fit mr-1">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-13.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-13.jpg" }}">
                                                       <div
                                                             class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
                                                       </div>
@@ -512,7 +530,8 @@
                                           <div class="cursor-pointer relative flex items-center mt-5">
                                                 <div class="w-12 h-12 flex-none image-fit mr-1">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-2.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-2.jpg" }}">
                                                       <div
                                                             class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
                                                       </div>
@@ -526,7 +545,8 @@
                                                                   05:09 AM</div>
                                                       </div>
                                                       <div class="w-full truncate text-gray-600">It is a long
-                                                            established fact that a reader will be asset/cms/assets/backend/distracted by the
+                                                            established fact that a reader will be
+                                                            by the
                                                             readable content of a page when looking at its layout. The
                                                             point of using Lorem </div>
                                                 </div>
@@ -534,7 +554,8 @@
                                           <div class="cursor-pointer relative flex items-center mt-5">
                                                 <div class="w-12 h-12 flex-none image-fit mr-1">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-14.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "asset/cms/assets/backend/dist/images/profile-14.jpg" }}">
                                                       <div
                                                             class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
                                                       </div>
@@ -556,7 +577,8 @@
                                           <div class="cursor-pointer relative flex items-center mt-5">
                                                 <div class="w-12 h-12 flex-none image-fit mr-1">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-6.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-6.jpg" }}">
                                                       <div
                                                             class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
                                                       </div>
@@ -578,7 +600,8 @@
                                           <div class="cursor-pointer relative flex items-center mt-5">
                                                 <div class="w-12 h-12 flex-none image-fit mr-1">
                                                       <img alt="Midone Tailwind HTML Admin Template"
-                                                            class="rounded-full" src="asset/cms/assets/backend/dist/images/profile-5.jpg">
+                                                            class="rounded-full"
+                                                            src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-5.jpg" }}">
                                                       <div
                                                             class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
                                                       </div>
@@ -605,7 +628,8 @@
                         <div class="intro-x dropdown w-8 h-8 relative">
                               <div
                                     class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in">
-                                    <img alt="Midone Tailwind HTML Admin Template" src="asset/cms/assets/backend/dist/images/profile-12.jpg">
+                                    <img alt="Midone Tailwind HTML Admin Template"
+                                          src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-12.jpg" }}">
                               </div>
                               <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
                                     <div class="dropdown-box__content box bg-theme-38 text-white">
@@ -884,7 +908,7 @@
                                                 details.</div>
                                           <div class="report-maps mt-5 bg-gray-200 rounded-md"
                                                 data-center="-6.2425342, 106.8626478"
-                                                data-sources="/asset/cms/assets/backend/dist/json/location.json"></div>
+                                                data-sources="/{{ assetHash "/asset/cms/assets/backend/dist/json/location.json" }}"></div>
                                     </div>
                               </div>
                               <!-- END: Official Store -->
@@ -901,7 +925,7 @@
                                                       <div
                                                             class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  src="asset/cms/assets/backend/dist/images/profile-14.jpg">
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-14.jpg" }}">
                                                       </div>
                                                       <div class="ml-4 mr-auto">
                                                             <div class="font-medium">Leonardo DiCaprio</div>
@@ -917,7 +941,7 @@
                                                       <div
                                                             class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  src="asset/cms/assets/backend/dist/images/profile-10.jpg">
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-10.jpg" }}">
                                                       </div>
                                                       <div class="ml-4 mr-auto">
                                                             <div class="font-medium">Tom Cruise</div>
@@ -933,7 +957,7 @@
                                                       <div
                                                             class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  src="asset/cms/assets/backend/dist/images/profile-12.jpg">
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-12.jpg" }}">
                                                       </div>
                                                       <div class="ml-4 mr-auto">
                                                             <div class="font-medium">Al Pacino</div>
@@ -949,7 +973,7 @@
                                                       <div
                                                             class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                             <img alt="Midone Tailwind HTML Admin Template"
-                                                                  src="asset/cms/assets/backend/dist/images/profile-6.jpg">
+                                                                  src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-6.jpg" }}">
                                                       </div>
                                                       <div class="ml-4 mr-auto">
                                                             <div class="font-medium">Russell Crowe</div>
@@ -1065,19 +1089,19 @@
                                                                         <div class="w-10 h-10 image-fit zoom-in">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-2.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-2.jpg" }}"
                                                                                     title="Uploaded at 6 August 2022">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-8.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-8.jpg" }}"
                                                                                     title="Uploaded at 1 May 2021">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-11.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-11.jpg" }}"
                                                                                     title="Uploaded at 10 October 2020">
                                                                         </div>
                                                                   </div>
@@ -1094,7 +1118,8 @@
                                                                   <div
                                                                         class="flex items-center justify-center text-theme-9">
                                                                         <i data-feather="check-square"
-                                                                              class="w-4 h-4 mr-2"></i> Active </div>
+                                                                              class="w-4 h-4 mr-2"></i> Active
+                                                                  </div>
                                                             </td>
                                                             <td class="table-report__action w-56">
                                                                   <div class="flex justify-center items-center">
@@ -1114,19 +1139,19 @@
                                                                         <div class="w-10 h-10 image-fit zoom-in">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-7.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-7.jpg" }}"
                                                                                     title="Uploaded at 21 July 2020">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-13.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-13.jpg" }}"
                                                                                     title="Uploaded at 31 December 2021">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-2.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-2.jpg" }}"
                                                                                     title="Uploaded at 9 September 2020">
                                                                         </div>
                                                                   </div>
@@ -1142,7 +1167,8 @@
                                                                   <div
                                                                         class="flex items-center justify-center text-theme-9">
                                                                         <i data-feather="check-square"
-                                                                              class="w-4 h-4 mr-2"></i> Active </div>
+                                                                              class="w-4 h-4 mr-2"></i> Active
+                                                                  </div>
                                                             </td>
                                                             <td class="table-report__action w-56">
                                                                   <div class="flex justify-center items-center">
@@ -1162,19 +1188,19 @@
                                                                         <div class="w-10 h-10 image-fit zoom-in">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-9.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-9.jpg" }}"
                                                                                     title="Uploaded at 5 January 2021">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-6.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-6.jpg" }}"
                                                                                     title="Uploaded at 18 November 2021">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-13.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-13.jpg" }}"
                                                                                     title="Uploaded at 1 June 2021">
                                                                         </div>
                                                                   </div>
@@ -1190,7 +1216,8 @@
                                                                   <div
                                                                         class="flex items-center justify-center text-theme-9">
                                                                         <i data-feather="check-square"
-                                                                              class="w-4 h-4 mr-2"></i> Active </div>
+                                                                              class="w-4 h-4 mr-2"></i> Active
+                                                                  </div>
                                                             </td>
                                                             <td class="table-report__action w-56">
                                                                   <div class="flex justify-center items-center">
@@ -1210,19 +1237,19 @@
                                                                         <div class="w-10 h-10 image-fit zoom-in">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-11.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-11.jpg" }}"
                                                                                     title="Uploaded at 22 April 2020">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-10.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-10.jpg" }}"
                                                                                     title="Uploaded at 12 December 2020">
                                                                         </div>
                                                                         <div class="w-10 h-10 image-fit zoom-in -ml-5">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="tooltip rounded-full"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-12.jpg"
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-12.jpg" }}"
                                                                                     title="Uploaded at 7 May 2020">
                                                                         </div>
                                                                   </div>
@@ -1239,7 +1266,8 @@
                                                                   <div
                                                                         class="flex items-center justify-center text-theme-9">
                                                                         <i data-feather="check-square"
-                                                                              class="w-4 h-4 mr-2"></i> Active </div>
+                                                                              class="w-4 h-4 mr-2"></i> Active
+                                                                  </div>
                                                             </td>
                                                             <td class="table-report__action w-56">
                                                                   <div class="flex justify-center items-center">
@@ -1306,7 +1334,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-14.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-14.jpg" }}">
                                                             </div>
                                                             <div class="ml-4 mr-auto">
                                                                   <div class="font-medium">Leonardo DiCaprio</div>
@@ -1320,7 +1348,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-10.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-10.jpg" }}">
                                                             </div>
                                                             <div class="ml-4 mr-auto">
                                                                   <div class="font-medium">Tom Cruise</div>
@@ -1334,7 +1362,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-12.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-12.jpg" }}">
                                                             </div>
                                                             <div class="ml-4 mr-auto">
                                                                   <div class="font-medium">Al Pacino</div>
@@ -1349,7 +1377,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-6.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-6.jpg" }}">
                                                             </div>
                                                             <div class="ml-4 mr-auto">
                                                                   <div class="font-medium">Russell Crowe</div>
@@ -1363,7 +1391,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-15.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-15.jpg" }}">
                                                             </div>
                                                             <div class="ml-4 mr-auto">
                                                                   <div class="font-medium">Al Pacino</div>
@@ -1393,7 +1421,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-9.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-9.jpg" }}">
                                                             </div>
                                                       </div>
                                                       <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -1410,7 +1438,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-10.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-10.jpg" }}">
                                                             </div>
                                                       </div>
                                                       <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -1426,19 +1454,19 @@
                                                                               title="Apple MacBook Pro 13">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="rounded-md border border-white"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-8.jpg">
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-8.jpg" }}">
                                                                         </div>
                                                                         <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in"
                                                                               title="Dell XPS 13">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="rounded-md border border-white"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-14.jpg">
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-14.jpg" }}">
                                                                         </div>
                                                                         <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in"
                                                                               title="Oppo Find X2 Pro">
                                                                               <img alt="Midone Tailwind HTML Admin Template"
                                                                                     class="rounded-md border border-white"
-                                                                                    src="asset/cms/assets/backend/dist/images/preview-5.jpg">
+                                                                                    src="{{ assetHash "/asset/cms/assets/backend/dist/images/preview-5.jpg" }}">
                                                                         </div>
                                                                   </div>
                                                             </div>
@@ -1451,7 +1479,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-4.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-4.jpg" }}">
                                                             </div>
                                                       </div>
                                                       <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -1470,7 +1498,7 @@
                                                             <div
                                                                   class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
                                                                   <img alt="Midone Tailwind HTML Admin Template"
-                                                                        src="asset/cms/assets/backend/dist/images/profile-12.jpg">
+                                                                        src="{{ assetHash "/asset/cms/assets/backend/dist/images/profile-12.jpg" }}">
                                                             </div>
                                                       </div>
                                                       <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -1687,8 +1715,7 @@
       <!-- BEGIN: JS Assets-->
       <script
             src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
-      <script src="asset/cms/assets/backend/dist/js/app.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/backend/dist/js/app.js" }}"></script>
       <!-- END: JS Assets-->
 </body>
 

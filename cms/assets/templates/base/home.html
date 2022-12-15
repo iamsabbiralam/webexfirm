@@ -4,14 +4,14 @@
 <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="asset/cms/assets/frontend/css/bootstrap.min.css" rel="stylesheet">
-      <link href="asset/cms/assets/frontend/css/bootstrap-icons.css" rel="stylesheet">
-      <link href="asset/cms/assets/frontend/css/all.min.css" rel="stylesheet">
-      <link href="asset/cms/assets/frontend/css/fontawesome.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="asset/cms/assets/frontend/css/swiper-bundle.min.css">
-      <link rel="stylesheet" href="asset/cms/assets/frontend/css/magnific-popup.css">
-      <link rel="stylesheet" href="asset/cms/assets/frontend/css/animate.min.css">
-      <link rel="stylesheet" href="asset/cms/assets/frontend/css/style.css">
+      <link href="{{ assetHash "/asset/cms/assets/frontend/css/bootstrap.min.css" }}" rel="stylesheet">
+      <link href="{{ assetHash "/asset/cms/assets/frontend/css/bootstrap-icons.css" }}" rel="stylesheet">
+      <link href="{{ assetHash "/asset/cms/assets/frontend/css/all.min.css" }}" rel="stylesheet">
+      <link href="{{ assetHash "/asset/cms/assets/frontend/css/fontawesome.min.css" }}" rel="stylesheet">
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/frontend/css/swiper-bundle.min.css" }}">
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/frontend/css/magnific-popup.css" }}">
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/frontend/css/animate.min.css" }}">
+      <link rel="stylesheet" href="{{ assetHash "/asset/cms/assets/frontend/css/style.css" }}">
       <title>Creasoft - Software and Digital Agency HTML Template</title>
 </head>
 
@@ -19,13 +19,13 @@
       <header class="header-area position_top">
             <div class="site-logo">
                   <div class="logo">
-                        <a href="index.html"><img src="asset/cms/assets/frontend/img/logo.svg" alt="image"></a>
+                        <a href="index.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/logo.svg" }}" alt="image"></a>
                   </div>
             </div>
             <div class="main-menu">
                   <nav class="main-nav">
                         <div class="mobile-menu-logo">
-                              <a href="index.html"><img src="asset/cms/assets/frontend/img/logo-dark.svg" alt=""></a>
+                              <a href="index.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/logo-dark.svg" }}" alt=""></a>
                               <div class="remove">
                                     <i class="bi bi-plus-lg"></i>
                               </div>
@@ -80,7 +80,7 @@
                         <div class="cmn-btn">
                               <div class="line-1"></div>
                               <div class="line-2"></div>
-                              <a href="contact.html">Get A Quote</a>
+                              <a href="{{.GlobalURLs.login}}">Login</a>
                         </div>
                   </div>
                   <div class="mobile-menu">
@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                           <div class="hero-img">
-                                                <img src="asset/cms/assets/frontend/img/hero-vector.png" alt="">
+                                                <img src="{{ assetHash "/asset/cms/assets/frontend/img/hero-vector.png" }}" alt="">
                                           </div>
                                     </div>
                               </div>
@@ -166,7 +166,7 @@
                                           <div class="single-service layout2">
                                                 <span>01</span>
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/service-icon-1.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/service-icon-1.png" }}" alt="">
                                                 </div>
                                                 <h4>Web Design</h4>
                                                 <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.
@@ -181,7 +181,7 @@
                                           <div class="single-service layout2">
                                                 <span>02</span>
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/img/frontend/icons/service-icon-2.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/img/frontend/icons/service-icon-2.png" }}" alt="">
                                                 </div>
                                                 <h4>UI/UX Design</h4>
                                                 <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.
@@ -196,7 +196,7 @@
                                           <div class="single-service layout2">
                                                 <span>03</span>
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/service-icon-3.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/service-icon-3.png" }}" alt="">
                                                 </div>
                                                 <h4>Software Development</h4>
                                                 <p>Integer purus odio, placerat nec rhoncu in, ullamcorper nec dolor.
@@ -232,7 +232,7 @@
                                           </p>
                                           <div class="company-since layout2">
                                                 <div class="company-logo">
-                                                      <img src="asset/cms/assets/frontend/img/logo.svg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/logo.svg" }}" alt="">
                                                 </div>
                                                 <strong>#1</strong>
                                                 <h4>Best Creative IT Agency And Solutions <span>Since 2005.</span></h4>
@@ -243,10 +243,10 @@
                                     data-wow-duration="1500ms">
                                     <div class="about-right layout2">
                                           <div class="banner-1">
-                                                <img src="asset/cms/assets/frontend/img/about-baner-1.jpg" alt="">
+                                                <img src="{{ assetHash "/asset/cms/assets/frontend/img/about-baner-1.jpg" }}" alt="">
                                           </div>
                                           <div class="banner-2">
-                                                <img src="asset/cms/assets/frontend/img/about-baner-2.jpg" alt="">
+                                                <img src="{{ assetHash "/asset/cms/assets/frontend/img/about-baner-2.jpg" }}" alt="">
                                                 <div class="banner2-inner">
                                                       <div class="play">
                                                             <a class="video-popup"
@@ -278,7 +278,7 @@
                                     <div class="single-feature">
                                           <div class="feature-inner">
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/feature-icon-1.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/feature-icon-1.png" }}" alt="">
                                                 </div>
                                                 <span class="counter">150</span><sup>+</sup>
                                                 <h4>Project Completed</h4>
@@ -290,7 +290,7 @@
                                     <div class="single-feature">
                                           <div class="feature-inner">
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/feature-icon-2.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/feature-icon-2.png" }}" alt="">
                                                 </div>
                                                 <span class="counter">250</span><sup>+</sup>
                                                 <h4>Satisfied Clients</h4>
@@ -302,7 +302,7 @@
                                     <div class="single-feature">
                                           <div class="feature-inner">
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/feature-icon-3.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/feature-icon-3.png" }}" alt="">
                                                 </div>
                                                 <span class="counter">50</span><sup>+</sup>
                                                 <h4>Expert Teams</h4>
@@ -314,7 +314,7 @@
                                     <div class="single-feature">
                                           <div class="feature-inner">
                                                 <div class="icon">
-                                                      <img src="asset/cms/assets/frontend/img/icons/feature-icon-4.png" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/icons/feature-icon-4.png" }}" alt="">
                                                 </div>
                                                 <span class="counter">28</span><sup>+</sup>
                                                 <h4>Win Awards</h4>
@@ -350,7 +350,7 @@
                         <div class="row g-4 project-items">
                               <div class="col-md-6 col-lg-4 single-item graphic ui">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-1.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-1.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -363,7 +363,7 @@
                               </div>
                               <div class="col-md-6 col-lg-4 single-item developing web">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-2.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-2.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -376,7 +376,7 @@
                               </div>
                               <div class="col-md-6 col-lg-4 single-item developing">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-3.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-3.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -389,7 +389,7 @@
                               </div>
                               <div class="col-md-6 col-lg-4 single-item graphic">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-4.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-4.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -402,7 +402,7 @@
                               </div>
                               <div class="col-md-6 col-lg-4 single-item ui">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-5.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-5.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -415,7 +415,7 @@
                               </div>
                               <div class="col-md-6 col-lg-4 single-item web">
                                     <div class="item-img">
-                                          <a href="portfolio.html"><img src="asset/cms/assets/frontend/img/project/project-6.jpg"
+                                          <a href="portfolio.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/project/project-6.jpg" }}"
                                                       alt=""></a>
                                     </div>
                                     <div class="item-inner-cnt">
@@ -451,27 +451,27 @@
                                           <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
                                                       <div class="single-partner">
-                                                            <img src="asset/cms/assets/frontend/img/partner/partner-1.png" alt="">
+                                                            <img src="{{ assetHash "/asset/cms/assets/frontend/img/partner/partner-1.png" }}" alt="">
                                                       </div>
                                                 </div>
                                                 <div class="swiper-slide">
                                                       <div class="single-partner">
-                                                            <img src="asset/cms/assets/frontend/img/partner/partner-2.png" alt="">
+                                                            <img src="{{ assetHash "/asset/cms/assets/frontend/img/partner/partner-2.png" }}" alt="">
                                                       </div>
                                                 </div>
                                                 <div class="swiper-slide">
                                                       <div class="single-partner">
-                                                            <img src="asset/cms/assets/frontend/img/partner/partner-3.png" alt="">
+                                                            <img src="{{ assetHash "/asset/cms/assets/frontend/img/partner/partner-3.png" }}" alt="">
                                                       </div>
                                                 </div>
                                                 <div class="swiper-slide">
                                                       <div class="single-partner">
-                                                            <img src="asset/cms/assets/frontend/img/partner/partner-4.png" alt="">
+                                                            <img src="{{ assetHash "/asset/cms/assets/frontend/img/partner/partner-4.png" }}" alt="">
                                                       </div>
                                                 </div>
                                                 <div class="swiper-slide">
                                                       <div class="single-partner">
-                                                            <img src="asset/cms/assets/frontend/img/partner/partner-5.png" alt="">
+                                                            <img src="{{ assetHash "/asset/cms/assets/frontend/img/partner/partner-5.png" }}" alt="">
                                                       </div>
                                                 </div>
                                           </div>
@@ -685,7 +685,7 @@
                                                       per sonic himenaeos. Praesent nec neque at dolor venenatis
                                                       consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                                 <div class="reviewer">
-                                                      <img src="asset/cms/assets/frontend/img/reivewer.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/reivewer.jpg" }}" alt="">
                                                 </div>
                                           </div>
                                     </div>
@@ -708,7 +708,7 @@
                                                       per sonic himenaeos. Praesent nec neque at dolor venenatis
                                                       consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                                 <div class="reviewer">
-                                                      <img src="asset/cms/assets/frontend/img/reivewer-1.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/reivewer-1.jpg" }}" alt="">
                                                 </div>
                                           </div>
                                     </div>
@@ -731,7 +731,7 @@
                                                       per sonic himenaeos. Praesent nec neque at dolor venenatis
                                                       consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                                 <div class="reviewer">
-                                                      <img src="asset/cms/assets/frontend/img/reivewer.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/reivewer.jpg" }}" alt="">
                                                 </div>
                                           </div>
                                     </div>
@@ -754,7 +754,7 @@
                                                       per sonic himenaeos. Praesent nec neque at dolor venenatis
                                                       consectetur europ Donec lacinia placerat felis non aliquam.</p>
                                                 <div class="reviewer">
-                                                      <img src="asset/cms/assets/frontend/img/reivewer-1.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/reivewer-1.jpg" }}" alt="">
                                                 </div>
                                           </div>
                                     </div>
@@ -782,7 +782,7 @@
                                           data-wow-duration="1500ms">
                                           <div class="single-team layout2">
                                                 <div class="member-img">
-                                                      <img src="asset/cms/assets/frontend/img/team/team-1.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/team/team-1.jpg" }}" alt="">
                                                       <svg width="185" height="299" viewBox="0 0 167 269" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -810,7 +810,7 @@
                                           data-wow-duration="1500ms">
                                           <div class="single-team layout2">
                                                 <div class="member-img">
-                                                      <img src="asset/cms/assets/frontend/img/team/team-2.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/team/team-2.jpg" }}" alt="">
                                                       <svg width="185" height="299" viewBox="0 0 167 269" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -838,7 +838,7 @@
                                           data-wow-duration="1500ms">
                                           <div class="single-team layout2">
                                                 <div class="member-img">
-                                                      <img src="asset/cms/assets/frontend/img/team/team-3.jpg" alt="">
+                                                      <img src="{{ assetHash "/asset/cms/assets/frontend/img/team/team-3.jpg" }}" alt="">
                                                       <svg width="185" height="299" viewBox="0 0 167 269" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -884,7 +884,7 @@
                                     data-wow-duration="1500ms">
                                     <div class="single-blog layout2">
                                           <div class="blog-thumb">
-                                                <a href="blog-details.html"><img src="asset/cms/assets/frontend/img/blog/blog-1.jpg"
+                                                <a href="blog-details.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/blog/blog-1.jpg" }}"
                                                             alt=""></a>
                                                 <div class="tag">
                                                       <a href="portfolio.html">UI/UX</a>
@@ -904,7 +904,7 @@
                                     data-wow-duration="1500ms">
                                     <div class="single-blog layout2">
                                           <div class="blog-thumb">
-                                                <a href="blog-details.html"><img src="asset/cms/assets/frontend/img/blog/blog-2.jpg"
+                                                <a href="blog-details.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/blog/blog-2.jpg" }}"
                                                             alt=""></a>
                                                 <div class="tag">
                                                       <a href="portfolio.html">Software</a>
@@ -924,7 +924,7 @@
                                     data-wow-duration="1500ms">
                                     <div class="single-blog layout2">
                                           <div class="blog-thumb">
-                                                <a href="blog-details.html"><img src="asset/cms/assets/frontend/img/blog/blog-3.jpg"
+                                                <a href="blog-details.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/blog/blog-3.jpg" }}"
                                                             alt=""></a>
                                                 <div class="tag">
                                                       <a href="portfolio.html">Dashbord</a>
@@ -979,7 +979,7 @@
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                           <div class="footer-widget">
                                                 <div class="footer-logo">
-                                                      <a href="index.html"><img src="asset/cms/assets/frontend/img/logo.svg" alt=""></a>
+                                                      <a href="index.html"><img src="{{ assetHash "/asset/cms/assets/frontend/img/logo.svg" }}" alt=""></a>
                                                 </div>
                                                 <p>Integer purus odio, placerat nec ande rhoncus in, ullamcorper nec
                                                       dolor. on aptent taciti sociosqu.</p>
@@ -1077,27 +1077,27 @@
       </main>
 
       <script data-cfasync="false" src="./cloudflare-static/email-decode.min.js"></script>
-      <script src="asset/cms/assets/frontend/js/jquery-3.6.0.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/jquery-3.6.0.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/popper.min.js"></script>
-      <script src="asset/cms/assets/frontend/js/bootstrap.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/popper.min.js" }}"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/bootstrap.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/swiper-bundle.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/swiper-bundle.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/waypoints.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/waypoints.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/jquery.counterup.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/jquery.counterup.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/isotope.pkgd.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/isotope.pkgd.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/jquery.magnific-popup.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/jquery.magnific-popup.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/wow.min.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/wow.min.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/particles.min.js"></script>
-      <script src="asset/cms/assets/frontend/js/app.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/particles.min.js" }}"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/app.js" }}"></script>
 
-      <script src="asset/cms/assets/frontend/js/custom.js"></script>
+      <script src="{{ assetHash "/asset/cms/assets/frontend/js/custom.js" }}"></script>
 </body>
 
 </html>

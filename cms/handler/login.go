@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"practice/webex/serviceutil/logging"
 
@@ -22,6 +23,7 @@ type LoginTempData struct {
 	CSRFField   template.HTML
 	Form        Login
 	FormAction  string
+	GlobalURLs  map[string]string
 	FormErrors  map[string]string
 	FormMessage map[string]string
 }
@@ -35,9 +37,16 @@ func (l Login) Validate(server *Server, r *http.Request, id string) error {
 }
 
 func (s *Server) loadLoginForm(w http.ResponseWriter, r *http.Request, data LoginTempData) {
-	if err := s.templates.ExecuteTemplate(w, "login.html", data); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	template := s.lookupTemplate("login.html")
+	if template == nil {
+		errMsg := "unable to load template"
+		http.Error(w, errMsg, http.StatusSeeOther)
 		return
+	}
+
+	if err := template.Execute(w, data); err != nil {
+		log.Printf("error with template execution: %+v", err)
+		http.Redirect(w, r, "", http.StatusSeeOther)
 	}
 }
 
@@ -47,6 +56,7 @@ func (s *Server) getLoginHandler(w http.ResponseWriter, r *http.Request) {
 	data := LoginTempData{
 		CSRFField:  csrf.TemplateField(r),
 		FormAction: loginURL,
+		GlobalURLs: adminViewURLs(),
 	}
 	s.loadLoginForm(w, r, data)
 }

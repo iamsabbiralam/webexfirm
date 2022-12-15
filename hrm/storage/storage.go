@@ -3,7 +3,11 @@ package storage
 import (
 	"database/sql"
 	"time"
+	"errors"
 )
+
+// NotFound is returned when the requested resource does not exist.
+var NotFound = errors.New("not found")
 
 type (
 	CRUDTimeDate struct {
@@ -16,12 +20,17 @@ type (
 	}
 
 	User struct {
-		ID        string `db:"id"`
-		FirstName string `db:"first_name"`
-		LastName  string `db:"last_name"`
-		Email     string `db:"email"`
-		Password  string `db:"password"`
-		Status    int    `db:"status"`
+		ID         string `db:"id"`
+		FirstName  string `db:"first_name"`
+		LastName   string `db:"last_name"`
+		Email      string `db:"email"`
+		Password   string `db:"password"`
+		Status     int    `db:"status"`
+		SearchTerm string `db:"search_term"`
+		Offset     int32  `db:"offset"`
+		Limit      int32  `db:"limit"`
+		Count      int
+		SortBy     string
 		CRUDTimeDate
 	}
 )
