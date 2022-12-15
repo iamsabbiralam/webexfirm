@@ -16,10 +16,7 @@ type User struct {
 	LastName    string
 	Email       string
 	Password    string
-	UserName    string
-	Gender      string
-	PhoneNumber string
-	DOB         time.Time
+	Status      int
 	CreatedAt   time.Time
 	CreatedBy   string
 	UpdatedAt   time.Time
@@ -48,7 +45,7 @@ func (s *Server) getAllUsersHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, errMsg, http.StatusSeeOther)
 		return
 	}
-	
+
 	queryString := GetQueryStringData(r, []string{}, false)
 	users, err := s.user.GetAllUsers(r.Context(), &user.GetAllUserRequest{
 		SearchTerm: queryString.SearchTerm,
@@ -70,7 +67,7 @@ func (s *Server) getAllUsersHandler(w http.ResponseWriter, r *http.Request) {
 				FirstName: item.FirstName,
 				LastName:  item.LastName,
 				Email:     item.Email,
-				DOB:       time.Time{},
+				Status:    int(item.Status),
 				CreatedAt: time.Time{},
 			}
 			userList = append(userList, userAppendData)
