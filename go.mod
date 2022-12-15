@@ -22,7 +22,6 @@ require (
 	github.com/urfave/negroni v1.0.0
 	github.com/yookoala/realpath v1.0.0
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
-	google.golang.org/appengine v1.6.7
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1
 )

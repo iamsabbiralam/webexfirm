@@ -6,12 +6,12 @@ const (
 	// home
 	homeURL = "/"
 	
-	// sign up path
+	// authentication route
 	registrationURL = "/registration"
 	loginURL = "/login"
-
-	dashboardPath = "/dashboard"
-
+	logoutPath = "/logout"
+	
 	// users path
+	dashboardPath = "/dashboard"
 	getAllUsersPath = "/users"
 )

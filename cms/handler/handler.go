@@ -63,6 +63,7 @@ func Handler(
 	r.HandleFunc(registrationURL, s.postSignUpMethod).Methods("POST")
 	r.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
 	r.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
+	r.HandleFunc(logoutPath, s.logoutHandler).Methods("GET").Name("logout")
 	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
 
 	l := r.NewRoute().Subrouter()
