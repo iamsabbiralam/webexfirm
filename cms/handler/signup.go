@@ -116,7 +116,7 @@ func (s *Server) postSignUpMethod(w http.ResponseWriter, r *http.Request) {
 			LastName:  form.LastName,
 			Email:     form.Email,
 			Password:  string(pass),
-			Status:    usr.Status_Inactive,
+			Status:    usr.Status_Active,
 		},
 	})
 	if err != nil {

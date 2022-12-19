@@ -112,7 +112,6 @@ func (s *Server) postLoginHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	session.Options.HttpOnly = true
 	session.Values["authUserID"] = res.User.ID
 	if err := session.Save(r, w); err != nil {
@@ -159,8 +158,8 @@ func passwordValidation(s *Server, r *http.Request, email, pass string) validati
 }
 
 func (s *Server) logoutHandler(w http.ResponseWriter, r *http.Request) {
-	log := s.logger.WithField("method", "logoutHandler")
-	fmt.Println("---session---")
+	ctx:= r.Context()
+	log := logging.FromContext(ctx).WithField("method", "logoutHandler")
 	session, err := s.sess.Get(r, sessionName)
 	if err != nil {
 		log.Fatal(err)
