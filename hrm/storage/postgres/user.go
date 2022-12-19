@@ -41,7 +41,8 @@ func (s *Storage) CreateUser(ctx context.Context, user storage.User) (string, er
 }
 
 const getUser = `
-	SELECT 
+	SELECT
+		id,
 		email,
 		password
 	FROM
