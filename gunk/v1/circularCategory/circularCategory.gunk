@@ -1,0 +1,112 @@
+package circularCategory
+
+import (
+	"github.com/gunk/opt/http"
+	"github.com/gunk/opt/openapiv2"
+	"time"
+)
+
+type Status int32
+
+const (
+	_ Status = iota
+	Active
+	Inactive
+)
+
+type CircularCategory struct {
+	ID          string    `pb:"1" json:"id"`
+	Name        string    `pb:"2" json:"name"`
+	Description string    `pb:"3" json:"description"`
+	Status      Status    `pb:"4" json:"status"`
+	Position    int64     `pb:"5" json:"position"`
+	CreatedAt   time.Time `pb:"6" json:"created_at"`
+	CreatedBy   string    `pb:"7" json:"created_by"`
+	UpdatedAt   time.Time `pb:"8" json:"updated_at"`
+	UpdatedBy   string    `pb:"9" json:"updated_by"`
+	DeletedAt   time.Time `pb:"10" json:"deleted_at"`
+	DeletedBy   string    `pb:"11" json:"deleted_by"`
+}
+
+type CreateCircularCategoryRequest struct {
+	ID          string    `pb:"1" json:"id"`
+	Name        string    `pb:"2" json:"name"`
+	Description string    `pb:"3" json:"description"`
+	Status      Status    `pb:"4" json:"status"`
+	Position    int64     `pb:"5" json:"position"`
+	CreatedAt   time.Time `pb:"6" json:"created_at"`
+	CreatedBy   string    `pb:"7" json:"created_by"`
+}
+
+type CreateCircularCategoryResponse struct {
+	ID string `pb:"1" json:"id"`
+}
+
+type UpdateCircularCategoryRequest struct {
+	ID          string    `pb:"1" json:"id"`
+	Name        string    `pb:"2" json:"name"`
+	Description string    `pb:"3" json:"description"`
+	Position    int64     `pb:"4" json:"position"`
+	Status      Status    `pb:"5" json:"status"`
+	UpdatedAt   time.Time `pb:"6" json:"updated_at"`
+	UpdatedBy   string    `pb:"7" json:"updated_by"`
+}
+
+type UpdateCircularCategoryResponse struct {
+	ID          string    `pb:"1" json:"id"`
+	Name        string    `pb:"2" json:"name"`
+	Description string    `pb:"3" json:"description"`
+	Position    int64     `pb:"4" json:"position"`
+	Status      Status    `pb:"5" json:"status"`
+	UpdatedAt   time.Time `pb:"6" json:"updated_at"`
+	UpdatedBy   string    `pb:"7" json:"updated_by"`
+}
+
+type GetCircularCategoryRequest struct {
+	ID string `pb:"1" json:"id"`
+}
+
+type GetCircularCategoryResponse struct {
+	ID          string    `pb:"1" json:"id"`
+	Name        string    `pb:"2" json:"name"`
+	Description string    `pb:"3" json:"description"`
+	Status      Status    `pb:"4" json:"status"`
+	Position    int64     `pb:"5" json:"position"`
+	CreatedAt   time.Time `pb:"6" json:"created_at"`
+	CreatedBy   string    `pb:"7" json:"created_by"`
+	UpdatedAt   time.Time `pb:"8" json:"updated_at"`
+	UpdatedBy   string    `pb:"9" json:"updated_by"`
+	DeletedAt   time.Time `pb:"10" json:"deleted_at"`
+	DeletedBy   string    `pb:"11" json:"deleted_by"`
+}
+
+type ListCircularCategoryRequest struct {
+	searchTerm string `pb:"1" json:"search_term"`
+	offset     int32  `pb:"2" json:"offset"`
+	limit      int32  `pb:"3" json:"limit"`
+	Status     Status `pb:"4" json:"status"`
+}
+
+type ListCircularCategoryResponse struct {
+	CircularCategory []CircularCategory `pb:"1" json:"circular_category"`
+	total            int32              `pb:"2" json:"total"`
+}
+
+type DeleteCircularCategoryRequest struct {
+	ID        string `pb:"1" json:"id"`
+	DeletedBy string `pb:"2" json:"deleted_by"`
+}
+
+type DeleteCircularCategoryResponse struct{}
+
+type CircularCategoryService interface {
+	CreateCircularCategory(CreateCircularCategoryRequest) CreateCircularCategoryResponse
+
+	UpdateCircularCategory(UpdateCircularCategoryRequest) UpdateCircularCategoryResponse
+
+	GetCircularCategory(GetCircularCategoryRequest) GetCircularCategoryResponse
+
+	ListCircularCategory(ListCircularCategoryRequest) ListCircularCategoryResponse
+
+	DeleteCircularCategory(DeleteCircularCategoryRequest) DeleteCircularCategoryResponse
+}

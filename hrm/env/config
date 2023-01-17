@@ -3,14 +3,14 @@ environment="development"
 
 [server]
 host="127.0.0.1"
-port="5000"
+port="5001"
 
 
 [database]
 host="127.0.0.1"
 port="5432"
 user="postgres"
-password="secret"
+password="P@ssw0rd"
 dbname="webexdb"
 migrationDir="migrations/sql"
 sslMode="disable"

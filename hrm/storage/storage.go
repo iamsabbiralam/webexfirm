@@ -2,8 +2,8 @@ package storage
 
 import (
 	"database/sql"
-	"time"
 	"errors"
+	"time"
 )
 
 // NotFound is returned when the requested resource does not exist.
@@ -31,6 +31,20 @@ type (
 		Limit      int32  `db:"limit"`
 		Count      int
 		SortBy     string
+		CRUDTimeDate
+	}
+
+	CircularCategory struct {
+		ID          string `db:"id"`
+		Name        string `db:"name"`
+		Description string `db:"description"`
+		Status      int32  `db:"status"`
+		Position     int32  `db:"position,"`
+		SearchTerm  string `db:"search_term"`
+		Offset      int32  `db:"offset"`
+		Limit       int32  `db:"limit"`
+		Count       int
+		SortBy      string
 		CRUDTimeDate
 	}
 )
