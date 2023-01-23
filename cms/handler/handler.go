@@ -3,7 +3,6 @@ package handler
 import (
 	"errors"
 	"io/fs"
-	"log"
 	"net/http"
 
 	// "text/template"
@@ -84,34 +83,4 @@ func Handler(
 	return r, nil
 }
 
-func (s *Server) authMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		session, err := s.sess.Get(r, sessionName)
-		if err != nil {
-			log.Fatal(err)
-		}
-		authUserID := session.Values["authUserID"]
-		if authUserID != nil {
-			next.ServeHTTP(w, r)
-		} else {
-			http.Redirect(w, r, loginURL, http.StatusTemporaryRedirect)
-		}
 
-	})
-}
-
-func (s *Server) loginMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		session, err := s.sess.Get(r, sessionName)
-		if err != nil {
-			log.Fatal(err)
-		}
-		authUserID := session.Values["authUserID"]
-		if authUserID != nil {
-			http.Redirect(w, r, homeURL, http.StatusTemporaryRedirect)
-			return
-		} else {
-			next.ServeHTTP(w, r)
-		}
-	})
-}
