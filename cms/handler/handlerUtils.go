@@ -2,6 +2,7 @@ package handler
 
 import (
 	"html/template"
+	"log"
 	"math"
 	"net/http"
 	"net/url"
@@ -130,4 +131,36 @@ func (s *Server) parseTemplates() error {
 // Round float to 2 decimal places
 func round(num float64) int {
 	return int(num + math.Copysign(0.5, num))
+}
+
+func (s *Server) authMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		session, err := s.sess.Get(r, sessionName)
+		if err != nil {
+			log.Fatal(err)
+		}
+		authUserID := session.Values["authUserID"]
+		if authUserID != nil {
+			next.ServeHTTP(w, r)
+		} else {
+			http.Redirect(w, r, loginURL, http.StatusTemporaryRedirect)
+		}
+
+	})
+}
+
+func (s *Server) loginMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		session, err := s.sess.Get(r, sessionName)
+		if err != nil {
+			log.Fatal(err)
+		}
+		authUserID := session.Values["authUserID"]
+		if authUserID != nil {
+			http.Redirect(w, r, homeURL, http.StatusTemporaryRedirect)
+			return
+		} else {
+			next.ServeHTTP(w, r)
+		}
+	})
 }
