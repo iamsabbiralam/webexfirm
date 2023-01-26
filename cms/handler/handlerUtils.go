@@ -65,6 +65,22 @@ func GetQueryStringData(r *http.Request, keys []string, isNotDefault bool) *Dyna
 	return &data
 }
 
+func cacheStaticFiles(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// if asset is hashed extend cache to 180 days
+		e := `"4FROTHS24N"`
+		w.Header().Set("Etag", e)
+		w.Header().Set("Cache-Control", "max-age=15552000")
+		if match := r.Header.Get("If-None-Match"); match != "" {
+			if strings.Contains(match, e) {
+				w.WriteHeader(http.StatusNotModified)
+				return
+			}
+		}
+		h.ServeHTTP(w, r)
+	})
+}
+
 func (s *Server) lookupTemplate(name string) *template.Template {
 	if s.env == "development" {
 		if err := s.parseTemplates(); err != nil {
@@ -103,7 +119,7 @@ func (s *Server) parseTemplates() error {
 		},
 	}).Funcs(sprig.FuncMap())
 
-	tmpl, err := templates.ParseFS(s.assets, "templates/*/*.html")
+	tmpl, err := templates.ParseFS(s.assets, "templates/*/*/*.html")
 	if err != nil {
 		return err
 	}

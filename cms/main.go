@@ -34,7 +34,7 @@ func main() {
 			strings.NewReplacer(".", "_"),
 		),
 	)
-	config.SetConfigFile("cms/env/config")
+	config.SetConfigFile("env/config")
 	config.SetConfigType("ini")
 	config.AutomaticEnv()
 	if err := config.ReadInConfig(); err != nil {
@@ -50,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 	
-	assetPath, err := realpath.Realpath(filepath.Join(wd, "cms/assets"))
+	assetPath, err := realpath.Realpath(filepath.Join(wd, "assets"))
 	if err != nil {
 		log.Fatal(err)
 	}
