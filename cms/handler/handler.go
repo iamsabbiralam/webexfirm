@@ -64,7 +64,7 @@ func Handler(
 	r.HandleFunc(loginURL, s.getLoginHandler).Methods("GET")
 	r.HandleFunc(loginURL, s.postLoginHandler).Methods("POST")
 	r.HandleFunc(logoutPath, s.logoutHandler).Methods("GET").Name("logout")
-	r.PathPrefix("/asset/").Handler(http.StripPrefix("/asset/", http.FileServer(http.Dir("./"))))
+	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", cacheStaticFiles(http.FileServer(http.FS(s.assetFS)))))
 
 	l := r.NewRoute().Subrouter()
 	l.Use(s.loginMiddleware)

@@ -31,6 +31,7 @@ type SignUpTempData struct {
 	FormAction  string
 	FormErrors  map[string]string
 	FormMessage map[string]string
+	GlobalURLs  map[string]string
 }
 
 func (sign SignUp) Validate(server *Server, r *http.Request, id string) error {
@@ -44,7 +45,7 @@ func (sign SignUp) Validate(server *Server, r *http.Request, id string) error {
 }
 
 func (s *Server) loadSignUpForm(w http.ResponseWriter, r *http.Request, data SignUpTempData) {
-	template := s.lookupTemplate("create-user.html")
+	template := s.lookupTemplate("register.html")
 	if template == nil {
 		errMsg := "unable to load template"
 		http.Error(w, errMsg, http.StatusSeeOther)
@@ -63,6 +64,7 @@ func (s *Server) signUpMethod(w http.ResponseWriter, r *http.Request) {
 		FormAction:  registrationURL,
 		FormErrors:  map[string]string{},
 		FormMessage: map[string]string{},
+		GlobalURLs:  adminViewURLs(),
 	}
 
 	s.loadSignUpForm(w, r, data)
@@ -97,6 +99,7 @@ func (s *Server) postSignUpMethod(w http.ResponseWriter, r *http.Request) {
 				FormAction:  registrationURL,
 				FormErrors:  vErrs,
 				FormMessage: map[string]string{},
+				GlobalURLs:  adminViewURLs(),
 			}
 			s.loadSignUpForm(w, r, data)
 			return

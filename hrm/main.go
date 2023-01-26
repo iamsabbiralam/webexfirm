@@ -23,7 +23,7 @@ func main() {
 			strings.NewReplacer(".", "_"),
 		),
 	)
-	config.SetConfigFile("hrm/env/config")
+	config.SetConfigFile("env/config")
 	config.SetConfigType("ini")
 	config.AutomaticEnv()
 	if err := config.ReadInConfig(); err != nil {
