@@ -5,8 +5,6 @@ import (
 	"io/fs"
 	"net/http"
 
-	// "text/template"
-
 	"github.com/benbjohnson/hashfs"
 	"github.com/gorilla/csrf"
 	"github.com/gorilla/mux"
@@ -16,8 +14,9 @@ import (
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 
-	user "practice/webex/gunk/v1/user"
 	"practice/webex/serviceutil/mw"
+	user "practice/webex/gunk/v1/user"
+	cc "practice/webex/gunk/v1/circularCategory"
 )
 
 const sessionName = "webex-session"
@@ -39,6 +38,11 @@ func Handler(
 			user.UserServiceClient
 		}{
 			UserServiceClient: user.NewUserServiceClient(hrmConn),
+		},
+		cc: struct {
+			cc.CircularCategoryServiceClient
+		}{
+			CircularCategoryServiceClient: cc.NewCircularCategoryServiceClient(hrmConn),
 		},
 	}
 
@@ -71,7 +75,16 @@ func Handler(
 	m := r.NewRoute().Subrouter()
 	m.Use(s.authMiddleware)
 	m.HandleFunc(dashboardPath, s.getDashboardMethods).Methods("GET").Name("dashboard")
-	m.HandleFunc(getAllUsersPath, s.getAllUsersHandler).Methods("GET").Name("userList")
+	m.HandleFunc(getAllUsersPath, s.getAllUsersHandler).Methods("GET").Name("user-list")
+
+	// circular categories
+	m.HandleFunc(createCircularCategoryPath, s.createCircularCategoryHandler).Methods("GET").Name("create-circular-category-path")
+	m.HandleFunc(createCircularCategoryPath, s.postCircularCategoryHandler).Methods("POST").Name("create-circular-category-action-path")
+	m.HandleFunc(circularCategoriesPath, s.listCircularCategoryHandler).Methods("GET").Name("list-circular-categories-path")
+	m.HandleFunc(updateCircularCategoryPath, s.getCircularCategoryHandler).Methods("GET").Name("update-circular-categories-path")
+	m.HandleFunc(updateCircularCategoryPath, s.updateCircularCategoryHandler).Methods("POST").Name("update-circular-categories-action-path")
+	m.HandleFunc(updateCircularCategoryStatusPath, s.updateCircularCategoryStatusHandler).Methods("POST").Name("update-circular-categories-status-action-path")
+	m.HandleFunc(deleteCircularCategoryPath, s.deleteCircularCategoryHandler).Methods("GET").Name("delete-circular-categories-path")
 
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := s.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {

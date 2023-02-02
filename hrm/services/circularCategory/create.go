@@ -3,18 +3,30 @@ package circularCategory
 import (
 	"context"
 
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
-
 	cc "practice/webex/gunk/v1/circularCategory"
-
 	"practice/webex/hrm/storage"
+
+	"google.golang.org/grpc/status"
 	"practice/webex/serviceutil/logging"
 )
 
 func (h *Handler) CreateCircularCategory(ctx context.Context, req *cc.CreateCircularCategoryRequest) (*cc.CreateCircularCategoryResponse, error) {
-	log := logging.FromContext(ctx).WithField("method", "service.CircularCategory.create")
-	dbPrm := storage.CircularCategory{
+	log := logging.FromContext(ctx).WithField("method", "service.circular-category.CreateCircularCategory")
+	dbPrm := formatCircularCategory(req)
+	id, err := h.ccst.CreateCircularCategory(ctx, dbPrm)
+	if err != nil {
+		errMsg := "failed to create circular category"
+		log.WithError(err).Error(errMsg)
+		return nil, status.Error(status.Convert(err).Code(), errMsg)
+	}
+
+	return &cc.CreateCircularCategoryResponse{
+		ID: id,
+	}, nil
+}
+
+func formatCircularCategory(req *cc.CreateCircularCategoryRequest) storage.CircularCategory {
+	storageC := storage.CircularCategory{
 		Name:        req.Name,
 		Description: req.Description,
 		Status:      int32(req.Status),
@@ -25,13 +37,5 @@ func (h *Handler) CreateCircularCategory(ctx context.Context, req *cc.CreateCirc
 		},
 	}
 
-	id, err := h.ccst.CreateCircularCategory(ctx, dbPrm)
-	if err != nil {
-		logging.WithError(err, log).Error("failed to create circular category")
-		return nil, status.Error(codes.Internal, "failed to create circular category")
-	}
-
-	return &cc.CreateCircularCategoryResponse{
-		ID: id,
-	}, nil
+	return storageC
 }
