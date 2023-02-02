@@ -1,0 +1,13 @@
+{{ define "status"}}
+<div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" name="Status">
+            <option value="">Select</option>
+            <option value="1" {{ if eq .status 1}} selected {{end}}>Active</option>
+            <option value="2" {{ if eq .status 2}} selected {{end}}>In-active</option>
+      </select>
+      {{with .FormErrors.Status}}
+      <p class="text-DangerColor pt-1 px-4 text-sm">{{.}}</p>
+      {{end}}
+</div>
+{{end}}

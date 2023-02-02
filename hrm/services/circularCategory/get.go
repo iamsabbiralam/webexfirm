@@ -3,7 +3,6 @@ package circularCategory
 import (
 	"context"
 
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
 	cc "practice/webex/gunk/v1/circularCategory"
@@ -11,12 +10,12 @@ import (
 )
 
 func (h *Handler) GetCircularCategory(ctx context.Context, req *cc.GetCircularCategoryRequest) (*cc.GetCircularCategoryResponse, error) {
-	log := logging.FromContext(ctx).WithField("method", "service.circularCategory.GetCircularCategory")
-	log.Trace("request received")
+	log := logging.FromContext(ctx).WithField("method", "service.circular-category.GetCircularCategory")
 	res, err := h.ccst.GetCircularCategory(ctx, req.GetID())
 	if err != nil {
-		logging.WithError(err, log).Error("no circular category found")
-		return nil, status.Error(codes.NotFound, "circular category doesn't exists")
+		errMsg := "no circular category found"
+		log.WithError(err).Error(errMsg)
+		return nil, status.Error(status.Convert(err).Code(), errMsg)
 	}
 
 	return &cc.GetCircularCategoryResponse{

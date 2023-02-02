@@ -27,6 +27,11 @@ type DynamicQueryString struct {
 	OthersValue map[string]string
 }
 
+type Status struct {
+	ID   int32
+	Name string
+}
+
 func GetQueryStringData(r *http.Request, keys []string, isNotDefault bool) *DynamicQueryString {
 	var data DynamicQueryString
 	queryParams := r.URL.Query()
@@ -118,6 +123,15 @@ func (s *Server) parseTemplates() error {
 		"assetHash": func(n string) string {
 			return path.Join("/", s.assetFS.HashName(strings.TrimPrefix(path.Clean(n), "/")))
 		},
+		"urls": func(url string, params ...string) string {
+			for _, v := range params {
+				a := strings.Split(v, "_")
+				if len(a) == 2 {
+					url = strings.Replace(url, "{"+a[0]+"}", a[1], 1)
+				}
+			}
+			return url
+		},
 	}).Funcs(sprig.FuncMap())
 
 	tmpl, err := templates.ParseFS(s.assets, "templates/*/*/*.html")
@@ -163,4 +177,25 @@ func (s *Server) loginMiddleware(next http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 		}
 	})
+}
+
+func GetStatus(st map[int32]string) []Status {
+	sts := []Status{}
+	for k, v := range st {
+		if k != 0 {
+			sts = append(sts, Status{
+				ID:   k,
+				Name: v,
+			})
+		}
+	}
+	return sts
+}
+
+func DynamicUrlSwitch(url string, params map[string]string) string {
+	for k, v := range params {
+		url = strings.Replace(url, "{"+k+"}", v, 1)
+	}
+	
+	return url
 }

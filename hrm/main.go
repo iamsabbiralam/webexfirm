@@ -7,10 +7,13 @@ import (
 	"strconv"
 	"strings"
 
-	userG "practice/webex/gunk/v1/user"
-	uc "practice/webex/hrm/core/user"
-	"practice/webex/hrm/services/user"
 	"practice/webex/hrm/storage/postgres"
+	userG "practice/webex/gunk/v1/user"
+	userC "practice/webex/hrm/core/user"
+	userS "practice/webex/hrm/services/user"
+	ccG "practice/webex/gunk/v1/circularCategory"
+	ccC "practice/webex/hrm/core/circularCategory"
+	ccS "practice/webex/hrm/services/circularCategory"
 
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -35,10 +38,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect database: %s", err)
 	}
-	cs := uc.NewCoreSvc(store)
-	s := user.NewUserServer(cs)
+
+	cs := userC.NewCoreSvc(store)
+	s := userS.NewUserServer(cs)
+
+	circularCategoryC := ccC.NewCoreSvc(store)
+	circularCategoryS := ccS.New(circularCategoryC)
 
 	userG.RegisterUserServiceServer(grpcServer, s)
+	ccG.RegisterCircularCategoryServiceServer(grpcServer, circularCategoryS)
 	host, port := config.GetString("server.host"), config.GetString("server.port")
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", host, port))
 	if err != nil {
@@ -72,3 +80,4 @@ func newDBFromConfig(config *viper.Viper) (*postgres.Storage, error) {
 	}
 	return db, nil
 }
+
