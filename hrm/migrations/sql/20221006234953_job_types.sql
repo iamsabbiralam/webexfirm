@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS job_types
 (
 
     id                          VARCHAR(100) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    title                       VARCHAR(255) NOT NULL DEFAULT '',
+    name                        VARCHAR(255) NOT NULL DEFAULT '',
     status                      SMALLINT              DEFAULT 0,
     position                    INT                   DEFAULT 0,
     created_at                  TIMESTAMP             DEFAULT current_timestamp,
