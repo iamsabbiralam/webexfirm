@@ -39,12 +39,24 @@ type (
 		Name        string `db:"name"`
 		Description string `db:"description"`
 		Status      int32  `db:"status"`
-		Position     int32  `db:"position,"`
+		Position    int32  `db:"position,"`
 		SearchTerm  string `db:"search_term"`
 		Offset      int32  `db:"offset"`
 		Limit       int32  `db:"limit"`
 		Count       int
 		SortBy      string
+		CRUDTimeDate
+	}
+
+	JobTypes struct {
+		ID         string `db:"id"`
+		Name       string `db:"name"`
+		Status     int    `db:"status"`
+		Position   int    `db:"position"`
+		SearchTerm string `db:"search_term"`
+		Offset     int32  `db:"offset"`
+		Limit      int32  `db:"limit"`
+		Count      int
 		CRUDTimeDate
 	}
 )
