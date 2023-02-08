@@ -14,9 +14,9 @@ import (
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 
-	"practice/webex/serviceutil/mw"
-	user "practice/webex/gunk/v1/user"
 	cc "practice/webex/gunk/v1/circularCategory"
+	user "practice/webex/gunk/v1/user"
+	"practice/webex/serviceutil/mw"
 )
 
 const sessionName = "webex-session"
@@ -95,5 +95,3 @@ func Handler(
 
 	return r, nil
 }
-
-

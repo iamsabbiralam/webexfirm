@@ -4,9 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"strings"
+
 	"practice/webex/hrm/storage"
 	"practice/webex/serviceutil/logging"
-	"strings"
 
 	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc/status"
@@ -173,7 +174,7 @@ func (s *Storage) UpdateCircularCategory(ctx context.Context, ctg storage.Circul
 		log.WithError(err).Error(errMsg)
 		return nil, status.Error(status.Convert(err).Code(), errMsg)
 	}
-	
+
 	return &cc, nil
 }
 
@@ -199,7 +200,7 @@ func (s *Storage) DeleteCircularCategory(ctx context.Context, cc storage.Circula
 
 	defer stmt.Close()
 	arg := map[string]interface{}{
-		"id": cc.ID,
+		"id":         cc.ID,
 		"deleted_by": "b6ddbe32-3d7e-4828-b2d7-da9927846e6b",
 	}
 	if _, err := stmt.Exec(arg); err != nil {

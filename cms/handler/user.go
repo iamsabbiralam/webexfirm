@@ -11,18 +11,18 @@ import (
 )
 
 type User struct {
-	ID          string
-	FirstName   string
-	LastName    string
-	Email       string
-	Password    string
-	Status      int
-	CreatedAt   time.Time
-	CreatedBy   string
-	UpdatedAt   time.Time
-	UpdatedBy   string
-	DeletedAt   time.Time
-	DeletedBy   string
+	ID        string
+	FirstName string
+	LastName  string
+	Email     string
+	Password  string
+	Status    int
+	CreatedAt time.Time
+	CreatedBy string
+	UpdatedAt time.Time
+	UpdatedBy string
+	DeletedAt time.Time
+	DeletedBy string
 }
 
 type UserTempData struct {

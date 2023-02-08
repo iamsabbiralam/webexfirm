@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"strings"
 
-	"practice/webex/hrm/storage/postgres"
-	userG "practice/webex/gunk/v1/user"
-	userC "practice/webex/hrm/core/user"
-	userS "practice/webex/hrm/services/user"
 	ccG "practice/webex/gunk/v1/circularCategory"
+	userG "practice/webex/gunk/v1/user"
 	ccC "practice/webex/hrm/core/circularCategory"
+	userC "practice/webex/hrm/core/user"
 	ccS "practice/webex/hrm/services/circularCategory"
+	userS "practice/webex/hrm/services/user"
+	"practice/webex/hrm/storage/postgres"
 
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -80,4 +80,3 @@ func newDBFromConfig(config *viper.Viper) (*postgres.Storage, error) {
 	}
 	return db, nil
 }
-

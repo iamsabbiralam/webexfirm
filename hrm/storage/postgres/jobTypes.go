@@ -8,7 +8,7 @@ import (
 
 	"practice/webex/hrm/storage"
 	"practice/webex/serviceutil/logging"
-	
+
 	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc/status"
 )
@@ -166,7 +166,7 @@ func (s *Storage) UpdateJobType(ctx context.Context, jobType storage.JobTypes) (
 		log.WithError(err).Error(errMsg)
 		return nil, status.Error(status.Convert(err).Code(), errMsg)
 	}
-	
+
 	return &job, nil
 }
 
@@ -192,7 +192,7 @@ func (s *Storage) DeleteJobType(ctx context.Context, cc storage.JobTypes) error 
 
 	defer stmt.Close()
 	arg := map[string]interface{}{
-		"id": cc.ID,
+		"id":         cc.ID,
 		"deleted_by": "b6ddbe32-3d7e-4828-b2d7-da9927846e6b",
 	}
 	if _, err := stmt.Exec(arg); err != nil {

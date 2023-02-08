@@ -196,7 +196,7 @@ func (s *Server) listCircularCategoryHandler(w http.ResponseWriter, r *http.Requ
 			circularCategories = append(circularCategories, getAllAppendData)
 		}
 	}
-	
+
 	formMessage := map[string]string{}
 	// search message conditions
 	if queryString.SearchTerm != "" && res != nil && len(res.GetCircularCategory()) > 0 {

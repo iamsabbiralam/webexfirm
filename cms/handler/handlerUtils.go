@@ -159,7 +159,6 @@ func (s *Server) authMiddleware(next http.Handler) http.Handler {
 		} else {
 			http.Redirect(w, r, loginURL, http.StatusTemporaryRedirect)
 		}
-
 	})
 }
 
@@ -196,6 +195,6 @@ func DynamicUrlSwitch(url string, params map[string]string) string {
 	for k, v := range params {
 		url = strings.Replace(url, "{"+k+"}", v, 1)
 	}
-	
+
 	return url
 }
