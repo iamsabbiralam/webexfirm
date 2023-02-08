@@ -4,8 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"practice/webex/hrm/storage"
 	"strings"
+
+	"practice/webex/hrm/storage"
 )
 
 const insertUser = `

@@ -4,6 +4,7 @@ package circularCategory
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -91,24 +92,28 @@ type CircularCategoryServiceServer interface {
 }
 
 // UnimplementedCircularCategoryServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCircularCategoryServiceServer struct {
-}
+type UnimplementedCircularCategoryServiceServer struct{}
 
 func (UnimplementedCircularCategoryServiceServer) CreateCircularCategory(context.Context, *CreateCircularCategoryRequest) (*CreateCircularCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCircularCategory not implemented")
 }
+
 func (UnimplementedCircularCategoryServiceServer) UpdateCircularCategory(context.Context, *UpdateCircularCategoryRequest) (*UpdateCircularCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCircularCategory not implemented")
 }
+
 func (UnimplementedCircularCategoryServiceServer) GetCircularCategory(context.Context, *GetCircularCategoryRequest) (*GetCircularCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCircularCategory not implemented")
 }
+
 func (UnimplementedCircularCategoryServiceServer) ListCircularCategory(context.Context, *ListCircularCategoryRequest) (*ListCircularCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCircularCategory not implemented")
 }
+
 func (UnimplementedCircularCategoryServiceServer) DeleteCircularCategory(context.Context, *DeleteCircularCategoryRequest) (*DeleteCircularCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCircularCategory not implemented")
 }
+
 func (UnimplementedCircularCategoryServiceServer) mustEmbedUnimplementedCircularCategoryServiceServer() {
 }
 

@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
 	"practice/webex/serviceutil/logging"
 
 	usr "practice/webex/gunk/v1/user"
@@ -99,7 +100,7 @@ func (s *Server) postLoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	res, err := s.user.GetUser(ctx, &usr.GetUserRequest{
 		User: &usr.User{
-			Email:    form.Email,
+			Email: form.Email,
 		},
 	})
 	if err != nil {
@@ -133,7 +134,7 @@ func emailValidation(s *Server, r *http.Request, email string) validation.Rule {
 
 		if err != nil {
 			return fmt.Errorf("invalid email given")
-			} else {
+		} else {
 			return nil
 		}
 	})
@@ -145,7 +146,7 @@ func passwordValidation(s *Server, r *http.Request, email, pass string) validati
 		logging.FromContext(r.Context()).WithField("method", "passwordValidation")
 		res, _ := s.user.GetUser(ctx, &usr.GetUserRequest{
 			User: &usr.User{
-				Email:    email,
+				Email: email,
 			},
 		})
 
@@ -158,7 +159,7 @@ func passwordValidation(s *Server, r *http.Request, email, pass string) validati
 }
 
 func (s *Server) logoutHandler(w http.ResponseWriter, r *http.Request) {
-	ctx:= r.Context()
+	ctx := r.Context()
 	log := logging.FromContext(ctx).WithField("method", "logoutHandler")
 	session, err := s.sess.Get(r, sessionName)
 	if err != nil {

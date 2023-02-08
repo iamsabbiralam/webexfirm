@@ -3,8 +3,8 @@ package user
 import (
 	"context"
 
-	"practice/webex/hrm/storage"
 	user "practice/webex/gunk/v1/user"
+	"practice/webex/hrm/storage"
 )
 
 type userCoreStore interface {
@@ -13,7 +13,7 @@ type userCoreStore interface {
 	GetAllUsers(context.Context, storage.User) ([]storage.User, error)
 }
 
-type Svc struct{
+type Svc struct {
 	user.UnimplementedUserServiceServer
 	core userCoreStore
 }

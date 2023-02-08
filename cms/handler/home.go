@@ -3,16 +3,17 @@ package handler
 import (
 	"log"
 	"net/http"
+
 	"practice/webex/serviceutil/logging"
 )
 
 type Auth struct {
-	Auth	interface{}
+	Auth interface{}
 }
 
 type HomeTempData struct {
-	Auth	Auth
-	GlobalURLs	map[string]string
+	Auth       Auth
+	GlobalURLs map[string]string
 }
 
 func (s *Server) home(w http.ResponseWriter, r *http.Request) {
@@ -39,7 +40,7 @@ func (s *Server) loadHomePage(w http.ResponseWriter, r *http.Request, data HomeT
 		http.Error(w, errMsg, http.StatusSeeOther)
 		return
 	}
-	
+
 	if err := template.Execute(w, data); err != nil {
 		log.Printf("error with template execution: %+v", err)
 		http.Redirect(w, r, "", http.StatusSeeOther)

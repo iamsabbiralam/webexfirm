@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
+
 	"practice/webex/cms/handler"
 	"practice/webex/serviceutil/logging"
-	"strings"
 
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
@@ -28,7 +29,7 @@ func main() {
 		"service": svcName,
 		"version": version,
 	})
-	
+
 	config := viper.NewWithOptions(
 		viper.EnvKeyReplacer(
 			strings.NewReplacer(".", "_"),
@@ -49,7 +50,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	assetPath, err := realpath.Realpath(filepath.Join(wd, "assets"))
 	if err != nil {
 		log.Fatal(err)

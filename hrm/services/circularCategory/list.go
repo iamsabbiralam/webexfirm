@@ -42,7 +42,7 @@ func (h *Handler) ListCircularCategory(ctx context.Context, req *cc.ListCircular
 			UpdatedBy:   c.UpdatedBy,
 		}
 	}
-	
+
 	var total int32
 	if len(ccList) > 0 {
 		total = int32(ccList[0].Count)

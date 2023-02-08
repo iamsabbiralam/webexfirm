@@ -93,7 +93,7 @@ type ListCircularCategoryResponse struct {
 }
 
 type DeleteCircularCategoryRequest struct {
-	ID        string `pb:"1" json:"id"`
+	ID string `pb:"1" json:"id"`
 }
 
 type DeleteCircularCategoryResponse struct{}

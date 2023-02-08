@@ -1,0 +1,102 @@
+package jobType
+
+import (
+	"github.com/gunk/opt/http"
+	"github.com/gunk/opt/openapiv2"
+	"time"
+)
+
+type Status int32
+
+const (
+	_ Status = iota
+	Active
+	Inactive
+)
+
+type JobTypes struct {
+	ID        string    `pb:"1" json:"id"`
+	Name      string    `pb:"2" json:"name"`
+	Status    Status    `pb:"3" json:"status"`
+	Position  int       `pb:"4" json:"position"`
+	CreatedAt time.Time `pb:"5" json:"created_at"`
+	UpdatedAt time.Time `pb:"7" json:"updated_at"`
+}
+
+type CreateJobTypesRequest struct {
+	Name      string    `pb:"1" json:"name"`
+	Status    Status    `pb:"2" json:"status"`
+	Position  int       `pb:"3" json:"position"`
+	CreatedAt time.Time `pb:"4" json:"created_at"`
+	CreatedBy string    `pb:"5" json:"created_by"`
+}
+
+type CreateJobTypesResponse struct {
+	ID string `pb:"1" json:"id"`
+}
+
+type GetJobTypesRequest struct {
+	ID string `pb:"1" json:"id"`
+}
+
+type GetJobTypesResponse struct {
+	ID       string `pb:"1" json:"id"`
+	Name     string `pb:"2" json:"name"`
+	Status   Status `pb:"3" json:"status"`
+	Position int    `pb:"4" json:"position"`
+}
+
+type UpdateJobTypesRequest struct {
+	ID        string    `pb:"1" json:"id"`
+	Name      string    `pb:"2" json:"name"`
+	Status    Status    `pb:"3" json:"status"`
+	Position  int       `pb:"4" json:"position"`
+	UpdatedAt time.Time `pb:"5" json:"updated_at"`
+	UpdatedBy string    `pb:"6" json:"updated_by"`
+}
+
+type UpdateJobTypesResponse struct {
+	ID string `pb:"1" json:"id"`
+}
+
+type ListJobTypesRequest struct {
+	searchTerm string `pb:"1" json:"search_term"`
+	offset     int32  `pb:"2" json:"offset"`
+	limit      int32  `pb:"3" json:"limit"`
+	Status     Status `pb:"4" json:"status"`
+}
+
+type ListJobTypesResponse struct {
+	JobTypes []JobTypes `pb:"1" json:"job_types"`
+	total    int32      `pb:"2" json:"total"`
+}
+
+type DeleteJobTypesRequest struct {
+	ID        string `pb:"1" json:"id"`
+	DeletedBy string `pb:"2" json:"deleted_by"`
+}
+
+type DeleteJobTypesResponse struct{}
+
+type GetJobTypesByTitleRequest struct {
+	Title string `pb:"1" json:"title"`
+}
+
+type GetJobTypesByTitleResponse struct {
+	ID   string `pb:"1" json:"id"`
+	Name string `pb:"2" json:"name"`
+}
+
+type JobTypesService interface {
+	CreateJobTypes(CreateJobTypesRequest) CreateJobTypesResponse
+
+	UpdateJobTypes(UpdateJobTypesRequest) UpdateJobTypesResponse
+
+	GetJobTypes(GetJobTypesRequest) GetJobTypesResponse
+
+	ListJobTypes(ListJobTypesRequest) ListJobTypesResponse
+
+	DeleteJobTypes(DeleteJobTypesRequest) DeleteJobTypesResponse
+
+	GetJobTypesByTitle(GetJobTypesByTitleRequest) GetJobTypesByTitleResponse
+}

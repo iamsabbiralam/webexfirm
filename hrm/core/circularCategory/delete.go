@@ -2,6 +2,7 @@ package circularCategory
 
 import (
 	"context"
+
 	"practice/webex/hrm/storage"
 	"practice/webex/serviceutil/logging"
 
@@ -15,6 +16,6 @@ func (cs *CoreSvc) DeleteCircularCategory(ctx context.Context, req storage.Circu
 		log.WithError(err).Error(errMsg)
 		return status.Error(status.Convert(err).Code(), errMsg)
 	}
-	
+
 	return nil
 }

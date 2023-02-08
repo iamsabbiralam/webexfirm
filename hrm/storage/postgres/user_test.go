@@ -2,8 +2,9 @@ package postgres
 
 import (
 	"context"
-	"practice/webex/hrm/storage"
 	"testing"
+
+	"practice/webex/hrm/storage"
 )
 
 func TestStorageGetUser(t *testing.T) {
