@@ -1,0 +1,90 @@
+{{ template "admin_layout_top" dict "title" "Job Types" }}
+<div id="layout-wrapper">
+      <!-- admin header -->
+      {{ template "admin_header" dict "GlobalURLs" .GlobalURLs }}
+      <!-- admin sidebar -->
+      {{ template "admin_sidebar" dict "GlobalURLs" .GlobalURLs }}
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+            <div class="page-content">
+                  <div class="container-fluid">
+                        <!-- start page title -->
+                        {{ template "admin_breadcrumb" dict "BTitle" "Job Types"}}
+                        <!-- end page title -->
+                        <div class="col-xl-12">
+                              <div class="card">
+                                    <div class="card-header d-flex justify-content-between">
+                                          <h4 class="card-title">Job Types</h4>
+                                          <a href="{{urls .URLs.create}}" style="color: white">
+                                                <button class="btn btn-success">
+                                                      Create Job Type
+                                                </button>
+                                          </a>
+                                    </div>
+                                    <div class="card-body">
+                                          <div class="table-responsive">
+                                                <table class="table table-striped mb-0">
+                                                      <thead>
+                                                            <tr>
+                                                                  <th>Job Type Name</th>
+                                                                  <th>Position</th>
+                                                                  <th>Status</th>
+                                                                  <th>Action</th>
+                                                            </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                            {{ range .Data}}
+                                                            {{$id := printf "%s%s" "id_" .ID}}
+                                                            <tr>
+                                                                  <td>{{.Title}}</td>
+                                                                  <td>{{.Position}}</td>
+                                                                  <td>
+                                                                        {{if eq .Status 1}}
+                                                                        <span class="badge bg-success">Active</span>
+                                                                        {{else}}
+                                                                        <span class="badge bg-danger">In-active</span>
+                                                                        {{end}}
+                                                                  </td>
+                                                                  <td class="d-flex justify-content-start">
+                                                                        <a href="{{urls $.URLs.update $id}}"
+                                                                              class="px-1">
+                                                                              <button class="btn btn-outline-info">
+                                                                                    <i class="far fa-edit"></i>
+                                                                              </button>
+                                                                        </a>
+                                                                        <a href="{{urls $.URLs.delete $id}}">
+                                                                              <button
+                                                                                    onclick="return confirm('Are you sure you want to delete this?')"
+                                                                                    class="btn btn-outline-danger">
+                                                                                    <i class="fas fa-trash"></i>
+                                                                              </button>
+                                                                        </a>
+                                                                  </td>
+                                                            </tr>
+                                                            {{end}}
+                                                      </tbody>
+                                                </table>
+                                          </div>
+                                    </div>
+                                    <!-- end card body -->
+                              </div>
+                              <!-- end card -->
+                        </div>
+                        <!-- end col -->
+                  </div>
+                  <!-- end row -->
+            </div><!-- end row -->
+      </div>
+      <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+{{template "admin_footer"}}
+</div>
+<!-- end main content-->
+</div>
+<!-- END layout-wrapper -->
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+{{template "admin_layout_bottom"}}

@@ -1,0 +1,90 @@
+{{ template "admin_layout_top" dict "title" "Create Job Type" }}
+<!-- Begin page -->
+<div id="layout-wrapper">
+      <!-- admin header -->
+      {{ template "admin_header" dict "GlobalURLs" .GlobalURLs }}
+      <!-- admin sidebar -->
+      {{ template "admin_sidebar" dict "GlobalURLs" .GlobalURLs }}
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+            <div class="page-content">
+                  <div class="container-fluid">
+                        <!-- start page title -->
+                        {{if eq .Form.ID ""}}
+                        {{ template "admin_breadcrumb" dict "BTitle" "Create Job Type"}}
+                        {{else}}
+                        {{ template "admin_breadcrumb" dict "BTitle" "Update Job Type"}}
+                        {{end}}
+                        <!-- end page title -->
+                        <div class="row">
+                              <div class="col-12">
+                                    <div class="card">
+                                          <div class="card-header">
+                                                <h4 class="card-title">Job Type</h4>
+                                          </div>
+                                          <div class="card-body p-4">
+                                                <div class="row">
+                                                      <div class="col-lg-6">
+                                                            <form action="{{.FormAction}}" method="post">
+                                                                  {{.CSRFField}}
+                                                                  <input type="hidden" name="ID" value="{{.Form.ID}}">
+                                                                  <div>
+                                                                        <div class="mb-3">
+                                                                              <label for="example-text-input"
+                                                                                    class="form-label">Name</label>
+                                                                              <input class="form-control" type="text"
+                                                                                    name="Title" value="{{.Form.Title}}">
+                                                                              {{with .FormErrors.Title}}
+                                                                              <p class="text-danger">{{.}}</p>
+                                                                              {{end}}
+                                                                        </div>
+                                                                        {{if ne .Form.ID ""}}
+                                                                        <div class="mb-3">
+                                                                              <label for="example-text-input"
+                                                                                    class="form-label">Position</label>
+                                                                              <input class="form-control" type="number"
+                                                                                    name="Position"
+                                                                                    value="{{.Form.Position}}">
+                                                                              {{with .FormErrors.Position}}
+                                                                              <p
+                                                                                    class="text-DangerColor pt-1 px-4 text-sm">
+                                                                                    {{.}}</p>
+                                                                              {{end}}
+                                                                        </div>
+                                                                        {{end}}
+                                                                        {{ template "status" dict "Status" .Status "FID" .Form.Status}}
+                                                                        <div class="mt-4">
+                                                                              <button type="submit"
+                                                                                    class="btn btn-primary w-md">Submit</button>
+                                                                              <a href="{{urls .URLs.list}}"
+                                                                                    style="color: white">
+                                                                                    <button type="button"
+                                                                                          class="btn btn-primary w-md">
+                                                                                          Back
+                                                                                    </button>
+                                                                              </a>
+                                                                        </div>
+                                                                  </div>
+                                                            </form>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                  </div><!-- end row -->
+            </div>
+            <!-- container-fluid -->
+      </div>
+      <!-- End Page-content -->
+      {{template "admin_footer"}}
+</div>
+<!-- end main content-->
+</div>
+<!-- END layout-wrapper -->
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+{{template "admin_layout_bottom"}}

@@ -4,6 +4,7 @@ package jobType
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -102,24 +103,28 @@ type JobTypesServiceServer interface {
 }
 
 // UnimplementedJobTypesServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedJobTypesServiceServer struct {
-}
+type UnimplementedJobTypesServiceServer struct{}
 
 func (UnimplementedJobTypesServiceServer) CreateJobTypes(context.Context, *CreateJobTypesRequest) (*CreateJobTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateJobTypes not implemented")
 }
+
 func (UnimplementedJobTypesServiceServer) UpdateJobTypes(context.Context, *UpdateJobTypesRequest) (*UpdateJobTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateJobTypes not implemented")
 }
+
 func (UnimplementedJobTypesServiceServer) GetJobTypes(context.Context, *GetJobTypesRequest) (*GetJobTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJobTypes not implemented")
 }
+
 func (UnimplementedJobTypesServiceServer) ListJobTypes(context.Context, *ListJobTypesRequest) (*ListJobTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListJobTypes not implemented")
 }
+
 func (UnimplementedJobTypesServiceServer) DeleteJobTypes(context.Context, *DeleteJobTypesRequest) (*DeleteJobTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteJobTypes not implemented")
 }
+
 func (UnimplementedJobTypesServiceServer) GetJobTypesByTitle(context.Context, *GetJobTypesByTitleRequest) (*GetJobTypesByTitleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJobTypesByTitle not implemented")
 }

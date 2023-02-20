@@ -9,5 +9,6 @@ func adminViewURLs() map[string]string {
 		"dashboard":          dashboardPath,
 		"userList":           getAllUsersPath,
 		"circularCategories": circularCategoriesPath,
+		"jobTypes":           jobTypesPath,
 	}
 }

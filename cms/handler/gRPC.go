@@ -10,6 +10,7 @@ import (
 	"github.com/sirupsen/logrus"
 
 	ccG "practice/webex/gunk/v1/circularCategory"
+	jobG "practice/webex/gunk/v1/jobType"
 	user "practice/webex/gunk/v1/user"
 )
 
@@ -23,6 +24,7 @@ type Server struct {
 	assets    fs.FS
 	user      userSignUp
 	cc        circularCategory
+	job       jobType
 }
 
 type userSignUp interface {
@@ -31,4 +33,8 @@ type userSignUp interface {
 
 type circularCategory interface {
 	ccG.CircularCategoryServiceClient
+}
+
+type jobType interface {
+	jobG.JobTypesServiceClient
 }

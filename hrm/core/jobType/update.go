@@ -2,7 +2,7 @@ package jobType
 
 import (
 	"context"
-	
+
 	"practice/webex/hrm/storage"
 	"practice/webex/serviceutil/logging"
 

@@ -24,4 +24,10 @@ const (
 	updateCircularCategoryPath       = "/circular-category/update/{id}"
 	deleteCircularCategoryPath       = "/circular-category/delete/{id}"
 	updateCircularCategoryStatusPath = "/circular-category/update/status/{id}"
+
+	/* job type */
+	createJobTypePath = "/job-type/create"
+	jobTypesPath      = "/job-types"
+	updateJobTypePath = "/job-type/update/{id}"
+	deleteJobTypePath = "/job-type/delete/{id}"
 )
