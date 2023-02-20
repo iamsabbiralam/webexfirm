@@ -7,13 +7,18 @@ import (
 	"strconv"
 	"strings"
 
-	ccG "practice/webex/gunk/v1/circularCategory"
-	userG "practice/webex/gunk/v1/user"
-	ccC "practice/webex/hrm/core/circularCategory"
-	userC "practice/webex/hrm/core/user"
-	ccS "practice/webex/hrm/services/circularCategory"
-	userS "practice/webex/hrm/services/user"
 	"practice/webex/hrm/storage/postgres"
+	userC "practice/webex/hrm/core/user"
+	userS "practice/webex/hrm/services/user"
+	userG "practice/webex/gunk/v1/user"
+
+	ccG "practice/webex/gunk/v1/circularCategory"
+	ccC "practice/webex/hrm/core/circularCategory"
+	ccS "practice/webex/hrm/services/circularCategory"
+
+	jobG "practice/webex/gunk/v1/jobType"
+	jobC "practice/webex/hrm/core/jobType"
+	jobS "practice/webex/hrm/services/jobType"
 
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -45,8 +50,12 @@ func main() {
 	circularCategoryC := ccC.NewCoreSvc(store)
 	circularCategoryS := ccS.New(circularCategoryC)
 
+	jobTypeC := jobC.NewCoreSvc(store)
+	jobTypeS := jobS.New(jobTypeC)
+
 	userG.RegisterUserServiceServer(grpcServer, s)
 	ccG.RegisterCircularCategoryServiceServer(grpcServer, circularCategoryS)
+	jobG.RegisterJobTypesServiceServer(grpcServer, jobTypeS)
 	host, port := config.GetString("server.host"), config.GetString("server.port")
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", host, port))
 	if err != nil {
