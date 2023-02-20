@@ -15,6 +15,7 @@ import (
 	"google.golang.org/grpc"
 
 	cc "practice/webex/gunk/v1/circularCategory"
+	job "practice/webex/gunk/v1/jobType"
 	user "practice/webex/gunk/v1/user"
 	"practice/webex/serviceutil/mw"
 )
@@ -43,6 +44,11 @@ func Handler(
 			cc.CircularCategoryServiceClient
 		}{
 			CircularCategoryServiceClient: cc.NewCircularCategoryServiceClient(hrmConn),
+		},
+		job: struct {
+			job.JobTypesServiceClient
+		}{
+			JobTypesServiceClient: job.NewJobTypesServiceClient(hrmConn),
 		},
 	}
 
@@ -77,7 +83,7 @@ func Handler(
 	m.HandleFunc(dashboardPath, s.getDashboardMethods).Methods("GET").Name("dashboard")
 	m.HandleFunc(getAllUsersPath, s.getAllUsersHandler).Methods("GET").Name("user-list")
 
-	// circular categories
+	/* circular categories */
 	m.HandleFunc(createCircularCategoryPath, s.createCircularCategoryHandler).Methods("GET").Name("create-circular-category-path")
 	m.HandleFunc(createCircularCategoryPath, s.postCircularCategoryHandler).Methods("POST").Name("create-circular-category-action-path")
 	m.HandleFunc(circularCategoriesPath, s.listCircularCategoryHandler).Methods("GET").Name("list-circular-categories-path")
@@ -85,6 +91,14 @@ func Handler(
 	m.HandleFunc(updateCircularCategoryPath, s.updateCircularCategoryHandler).Methods("POST").Name("update-circular-categories-action-path")
 	m.HandleFunc(updateCircularCategoryStatusPath, s.updateCircularCategoryStatusHandler).Methods("POST").Name("update-circular-categories-status-action-path")
 	m.HandleFunc(deleteCircularCategoryPath, s.deleteCircularCategoryHandler).Methods("GET").Name("delete-circular-categories-path")
+
+	/* job type */
+	m.HandleFunc(createJobTypePath, s.createJobTypeHandler).Methods("GET").Name("create-job-type-path")
+	m.HandleFunc(createJobTypePath, s.createPostJobTypeHandler).Methods("POST").Name("create-job-type-action-path")
+	m.HandleFunc(jobTypesPath, s.getAllJobTypeHandler).Methods("GET").Name("job-types-path")
+	m.HandleFunc(updateJobTypePath, s.updateJobTypesHandler).Methods("GET").Name("job-type-update-path")
+	m.HandleFunc(updateJobTypePath, s.updatePostJobTypesHandler).Methods("POST").Name("job-type-update-action-path")
+	m.HandleFunc(deleteJobTypePath, s.deleteJobTypeHandler).Methods("GET").Name("job-type-delete-action-path")
 
 	r.NotFoundHandler = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		if err := s.templates.ExecuteTemplate(rw, "404.html", nil); err != nil {
