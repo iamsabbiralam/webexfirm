@@ -148,26 +148,26 @@ const updateJobType = `
 	WHERE 
 		id = :id
 	RETURNING
-		*`
+		id`
 
-func (s *Storage) UpdateJobType(ctx context.Context, jobType storage.JobTypes) (*storage.JobTypes, error) {
+func (s *Storage) UpdateJobType(ctx context.Context, jobType storage.JobTypes) (string, error) {
 	log := logging.FromContext(ctx).WithField("method", "storage.job-type.UpdateJobTypes")
 	stmt, err := s.db.PrepareNamed(updateJobType)
 	if err != nil {
 		errMsg := "failed to prepared update job type statement"
 		log.WithError(err).Error(errMsg)
-		return nil, status.Error(status.Convert(err).Code(), errMsg)
+		return "", status.Error(status.Convert(err).Code(), errMsg)
 	}
 
 	defer stmt.Close()
-	var job storage.JobTypes
-	if err := stmt.Get(&job, jobType); err != nil {
+	var id string
+	if err := stmt.Get(&id, jobType); err != nil {
 		errMsg := "failed to execute update job type by id"
 		log.WithError(err).Error(errMsg)
-		return nil, status.Error(status.Convert(err).Code(), errMsg)
+		return "", status.Error(status.Convert(err).Code(), errMsg)
 	}
 
-	return &job, nil
+	return id, nil
 }
 
 const deleteJobType = `
